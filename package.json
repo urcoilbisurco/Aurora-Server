@@ -1,0 +1,18 @@
+{
+  "name": "aurora-server",
+  "version": "1.0.0",
+  "description": "Express.js server to handle state of IoT applications",
+  "main": "index.js",
+  "scripts": {
+    "start": "supervisor index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Francesco Marassi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.0",
+    "express": "^4.15.0",
+    "redis": "^2.6.5",
+    "supervisor": "^0.12.0"
+  }
+}
