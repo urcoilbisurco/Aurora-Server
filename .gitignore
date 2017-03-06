@@ -1,3 +1,4 @@
 /node_modules/*
+_env.js
 *.log
 .DS_Store

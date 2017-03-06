@@ -12,13 +12,17 @@ var db={
   update:function(id, key, values, cb){
     data={}
     data[key]=values
+    console.log("UPDATE", values)
     mongo.findAndModify({
       query:{_id:ObjectId(id)},
       update:{$set: data},
+      new:true,
     }, function(err, doc, lastErrorObject) {
-      if(cb){cb(doc)}
+      console.log("DOC", doc)
+      if(cb){cb(doc[key])}
     });
   },
+
   get:function(id, key, cb){
     mongo.findOne({_id:ObjectId(id)}, function(err,obj){
       console.log(obj)

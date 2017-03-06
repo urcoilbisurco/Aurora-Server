@@ -1,8 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 
-var routes= require("./routes/routes.js");
-
+var routes= require("./routes/routes");
+var client=require("./utils/mqtt");
 var app = express();
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies

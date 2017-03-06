@@ -2,7 +2,7 @@ var db = require('../utils/db');
 var controller={
   getUser: function(req, res){
     db.findUser(req.params.uuid,function(err,user){
-      res.send({
+      res.json({
         user:user
       })
     })
@@ -14,7 +14,7 @@ var controller={
       }
     }
     db.save(data)
-    res.send({
+    res.json({
       user:data
     });
   },

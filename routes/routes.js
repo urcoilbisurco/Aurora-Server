@@ -4,7 +4,7 @@ var objects_controller=require("../app/objects_controller");
 var users_controller=require("../app/users_controller");
 
 
-router.route("/api/v1/:uuid/:name/")
+router.route("/api/v1/:uuid/:node/")
   .get(objects_controller.getStatusInfo)
   .post(objects_controller.setStatusInfo);
 
