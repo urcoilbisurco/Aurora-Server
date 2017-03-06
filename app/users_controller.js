@@ -1,33 +1,22 @@
-var redis = require('../utils/redis.js');
-var uuidV1 = require('uuid/v1');
+var db = require('../utils/db');
 var controller={
   getUser: function(req, res){
-    //get Redis status for :name and return it
-    store="users:"+req.params.uuid;
-    redis.hgetall(store, function(err, obj){
+    db.findUser(req.params.uuid,function(err,user){
       res.send({
-        user:obj
-      });
-    });
+        user:user
+      })
+    })
   },
   createUser:function(req,res){
-    uuid=uuidV1()
     data={
-      "uuid":uuid,
       "info":{
         "name":req.body.name
       }
     }
-    store="users:"+uuid;
-    console.log(JSON.stringify(data))
-    redis.hmset(store, data, function(err,result){
-      redis.hgetall(store, function(err, obj){
-        res.send({
-          user:obj
-        });
-      });
+    db.save(data)
+    res.send({
+      user:data
     });
-
   },
 }
 

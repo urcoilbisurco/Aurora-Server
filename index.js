@@ -1,12 +1,9 @@
 var express = require('express');
-var redis = require('redis');
 var bodyParser = require('body-parser')
-
 
 var routes= require("./routes/routes.js");
 
 var app = express();
-var client = redis.createClient();
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies

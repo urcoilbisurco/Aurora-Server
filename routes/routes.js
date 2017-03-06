@@ -9,7 +9,6 @@ router.route("/api/v1/:uuid/:name/")
   .post(objects_controller.setStatusInfo);
 
 
-
 router.route("/api/v1/:uuid")
   .get(users_controller.getUser)
 router.route("/api/v1/users")
