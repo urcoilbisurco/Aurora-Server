@@ -1,10 +1,19 @@
 
-## Rico
+## Aurora Server
 Express.js server for Aurora smart home project.
 
 ## Installation
 
-Run
+create an "app/_env.js" file with inside:
+
+```javascript
+var env={
+  mqtt_server:"your firebase config"
+}
+module.exports=env;
+```
+
+Then run
 
 ```
   npm install
