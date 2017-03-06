@@ -1,23 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var objects_controller=require("../app/objects_controller");
+var users_controller=require("../app/users_controller");
+
 
 router.route("/api/v1/:uuid/:name/")
-  .get(function(req, res){
-    //get Redis status for :name and return it
-    res.send({
-      uuid:req.params.uuid,
-      name:req.params.name,
-    })
-  })
-  .post(function(req, res){
-    console.log(req.body);
-    //save in Redis (":uuid/:name", req.body)
-    res.send({
-      uuid:req.params.uuid,
-      name:req.params.name,
-      body:req.body,
-    })
-  })
+  .get(objects_controller.getStatusInfo)
+  .post(objects_controller.setStatusInfo);
+
+
+
+router.route("/api/v1/:uuid")
+  .get(users_controller.getUser)
+router.route("/api/v1/users")
+  .post(users_controller.createUser)
+
 
 router.get('/', function (req, res) {
   //ready, return the React app
