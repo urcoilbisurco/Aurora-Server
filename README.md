@@ -8,7 +8,7 @@ create an "app/_env.js" file with inside:
 
 ```javascript
 var env={
-  mqtt_server:"your firebase config"
+  mqtt_server:"your mtqq server"
 }
 module.exports=env;
 ```
