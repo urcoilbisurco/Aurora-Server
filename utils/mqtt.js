@@ -8,7 +8,7 @@ client.on("connect", function(){
 });
 
 client.on("message", function(topic,message){
-  if(topic.includes("update")){
+  if(topic.includes("updated")){
     update(topic, message.toString());
   }
 });

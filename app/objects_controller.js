@@ -9,7 +9,9 @@ var controller={
   },
   setStatusInfo:function(req,res){
     db.update(req.params.uuid, req.params.node, req.body, function(doc){
-      mqtt.publish(req.params.uuid+"/"+req.params.node+"/update", JSON.stringify(doc))
+      topic=req.params.uuid+"/"+req.params.node+"/update"
+      console.log("publishing on...", topic)
+      mqtt.publish(topic, JSON.stringify(doc))
     })
     res.json(req.body);
   },

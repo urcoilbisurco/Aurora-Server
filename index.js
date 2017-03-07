@@ -1,6 +1,7 @@
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
+var broker=require("./utils/broker");
 var routes= require("./routes/routes");
 var client=require("./utils/mqtt");
 var app = express();
