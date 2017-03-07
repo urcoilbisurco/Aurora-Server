@@ -13,7 +13,7 @@ var controller={
         "name":req.body.name
       }
     }
-    db.save(data)
+    db.saveUser(data)
     res.json({
       user:data
     });
