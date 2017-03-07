@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var env=require("_env.js");
+var env=require("./_env.js");
 var broker=require("./utils/broker");
 var routes= require("./routes/routes");
 var client=require("./utils/mqtt");
