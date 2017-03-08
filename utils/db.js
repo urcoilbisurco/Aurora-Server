@@ -1,36 +1,72 @@
 var mongojs = require('mongojs');
-var mongo = mongojs('aurora').collection("users");
+var mongo = require('mongodb').MongoClient
+var env=require("../_env.js");
+
+var db;
+mongo.connect(env.mongo, function(err, _db) {
+  console.log("Connected successfully to mongodb");
+  db=_db;
+  db.users= db.collection("users");
+  db.nodes = db.collection("nodes");
+});
 var ObjectId = require('mongodb').ObjectId;
 
-var db={
-  findUser:function(id, cb){
-    mongo.find({_id:ObjectId(id)},cb)
+module.exports={
+  users:{
+    get:function(id){
+      return new Promise(function(resolve, reject){
+        db.users.findOne({_id:ObjectId(id)},function(err, doc){
+          resolve(doc);
+        });
+      })
+    },
+    save:function(data){
+      return new Promise(function(resolve, reject){
+        db.users.insert(data, function(err,doc){
+          console.log(doc.ops[0])
+          resolve(doc.ops[0])
+        })
+      })
+    },
   },
-  saveUser:function(data, cb){
-    mongo.save(data, cb)
-  },
-  update:function(id, key, values, cb){
-    data={}
-    data[key]=values
-    console.log("UPDATE", values)
-    mongo.findAndModify({
-      query:{_id:ObjectId(id)},
-      update:{$set: data},
-      new:true,
-    }, function(err, doc, lastErrorObject) {
-      console.log("DOC", doc)
-      if(cb){cb(doc[key])}
-    });
-  },
-
-  get:function(id, key, cb){
-    mongo.findOne({_id:ObjectId(id)}, function(err,obj){
-      console.log(obj)
-      if(cb){cb(obj[key])}
-    })
+  nodes:{
+    generate:function(data, cb){
+      return new Promise(function(resolve, reject){
+        db.nodes.insert(data, function(err,doc){
+          resolve(doc.ops[0])
+        })
+      })
+    },
+    register:function(id, code, values, cb){
+      return new Promise(function(resolve, reject){
+        db.nodes.findOneAndUpdate(
+          {code:code, user:id},
+          {$set: {registered:true}},
+          function(err, doc) {
+            resolve(doc.value)
+          }
+        );
+      });
+    },
+    updateState:function(user, node, values){
+      return new Promise(function(resolve, reject){
+        db.nodes.findOneAndUpdate(
+          {_id:ObjectId(node), user:user},
+          {$set:{state:values}},
+          function(err, doc) {
+            resolve(doc.value)
+          }
+        );
+      })
+    },
+    get:function(user, node){
+      return new Promise(function(resolve, reject){
+        db.nodes.findOne({_id:ObjectId(node), user:user}, function(err,obj){
+          console.log("obj", obj)
+          resolve(obj)
+        })
+      })
+    }
   }
 
 }
-
-
-module.exports=db;
