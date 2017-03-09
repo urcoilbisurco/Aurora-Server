@@ -3,7 +3,7 @@ var router = express.Router();
 var objects_controller=require("../app/objects_controller");
 var users_controller=require("../app/users_controller");
 
-router.route("/api/v1/:uuid/nodes/register/:code")
+router.route("/api/v1/nodes/register/:code")
   .post(objects_controller.registerNode)
 
 router.route("/api/v1/:uuid/nodes")

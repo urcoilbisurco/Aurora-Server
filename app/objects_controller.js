@@ -22,7 +22,7 @@ var controller={
   },
   registerNode:function(req,res){
     db
-    .nodes.register(req.params.uuid, req.params.code)
+    .nodes.register(req.params.code)
     .then(function(node){
       res.json(node);
     })
