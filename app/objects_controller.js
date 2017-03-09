@@ -15,9 +15,9 @@ var controller={
     db.nodes.updateState(req.params.uuid, req.params.node, req.body)
     .then(function(doc){
       res.json(doc);
-      // topic=req.params.uuid+"/"+req.params.node+"/update"
-      // console.log("publishing on...", topic)
-      // mqtt.publish(topic, JSON.stringify(doc))
+      topic=req.params.uuid+"/"+req.params.node+"/update"
+      console.log("publishing on...", topic)
+      mqtt.publish(topic, JSON.stringify(doc))
     })
   },
   registerNode:function(req,res){

@@ -13,16 +13,16 @@ var ObjectId = require('mongodb').ObjectId;
 
 module.exports={
   users:{
-    get:function(id){
-      return new Promise(function(resolve, reject){
-        db.users.findOne({_id:ObjectId(id)},function(err, doc){
+    get: (id) => {
+      return new Promise((resolve, reject) => {
+        db.users.findOne({_id:ObjectId(id)},(err, doc) => {
           resolve(doc);
         });
       })
     },
-    save:function(data){
-      return new Promise(function(resolve, reject){
-        db.users.insert(data, function(err,doc){
+    save:(data) => {
+      return new Promise((resolve, reject) => {
+        db.users.insert(data, (err,doc) => {
           console.log(doc.ops[0])
           resolve(doc.ops[0])
         })
@@ -30,38 +30,48 @@ module.exports={
     },
   },
   nodes:{
-    generate:function(data, cb){
-      return new Promise(function(resolve, reject){
-        db.nodes.insert(data, function(err,doc){
+    generate:(data, cb) => {
+      return new Promise((resolve, reject) => {
+        db.nodes.insert(data, (err,doc) => {
           resolve(doc.ops[0])
         })
       })
     },
-    register:function(id, code, values, cb){
-      return new Promise(function(resolve, reject){
+    register:(id, code, values, cb) => {
+      return new Promise((resolve, reject) => {
         db.nodes.findOneAndUpdate(
           {code:code, user:id},
           {$set: {registered:true}},
-          function(err, doc) {
+          {returnOriginal:false},
+          (err, doc) =>  {
             resolve(doc.value)
           }
         );
       });
     },
-    updateState:function(user, node, values){
-      return new Promise(function(resolve, reject){
+    updateState:(user, node, values) => {
+      return new Promise((resolve, reject) => {
         db.nodes.findOneAndUpdate(
           {_id:ObjectId(node), user:user},
           {$set:{state:values}},
-          function(err, doc) {
+          {returnOriginal:false},
+          (err, doc) =>  {
             resolve(doc.value)
           }
         );
       })
     },
-    get:function(user, node){
-      return new Promise(function(resolve, reject){
-        db.nodes.findOne({_id:ObjectId(node), user:user}, function(err,obj){
+    query: (_query) => {
+      return new Promise((resolve, reject) => {
+        console.log(_query);
+        db.nodes.find(_query, (err,obj) => {
+          resolve(obj.toArray())
+        })
+      })
+    },
+    get:(user, node) => {
+      return new Promise((resolve, reject) => {
+        db.nodes.findOne({_id:ObjectId(node), user:user}, (err,obj) => {
           console.log("obj", obj)
           resolve(obj)
         })

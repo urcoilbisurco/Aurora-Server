@@ -1,23 +1,26 @@
 var db = require('../utils/db');
 var controller={
-  getUser: function(req, res){
-    db.users
-    .findUser(req.params.uuid)
-    .then(function(user){
+  getUser: (req, res) => {
+    Promise.all([db.users.get(req.params.uuid), db.nodes.query({user:req.params.uuid})])
+    .then( data => {
+      console.log("????", data)
+      user=data[0]
+      nodes=data[1]
+      user.nodes=nodes
       res.json({
         user:user
       })
     })
   },
-  createUser:function(req,res){
+  createUser: (req,res) => {
     data={
       "info":{
         "name":req.body.name
       }
     }
     db.users
-    .saveUser(data)
-    .then(function(user){
+    .save(data)
+    .then( user=>{
       res.json({
         user:user
       });
