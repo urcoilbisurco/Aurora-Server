@@ -1,0 +1,45 @@
+.scene_card{
+  min-width:40%;
+  border-radius:5px;
+  cursor:pointer;
+  &:first-child{
+    .main{
+      margin-left:8px;
+    }
+  }
+  &:last-child{
+    .main{
+      margin-right:8px;
+    }
+  }
+  .main{
+    margin:8px 4px;
+    border-radius:5px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height:150px;
+    background-size:cover;
+    background-position:50%;
+  }
+  .text_container{
+    border-radius:5px;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    background:rgba(0,0,0,0.7);
+    padding:16px;
+  }
+  .open{
+    background:rgba(0,0,0,0.2);
+  }
+.text{
+    color:white;
+    font-size:20px;
+    font-weight:300;
+  }
+  .switch{
+    margin-top:auto;
+    margin-left:auto;
+  }
+}

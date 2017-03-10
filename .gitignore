@@ -1,4 +1,5 @@
 /node_modules/*
 _env.js
+*/_env.js
 *.log
 .DS_Store

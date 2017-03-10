@@ -1,0 +1,27 @@
+.switch{
+  border:3px solid white;
+  color:white;
+  padding:4px 8px;
+  cursor:pointer;
+  width:50px;
+  display:flex;
+  padding:2px;
+  border-radius:999em;
+  -webkit-tap-highlight-color: transparent;
+  cursor:pointer;
+}
+.handler{
+  -webkit-tap-highlight-color: transparent;
+  width:20px;
+  height:20px;
+  border-radius:999em;
+  -webkit-transition: .4s;
+  transition: .4s;
+  &.on{
+    background:white;
+  }
+  &.off{
+    transform: translateX(30px);
+    background:#536DFE;
+  }
+}

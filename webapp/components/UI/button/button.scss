@@ -1,0 +1,17 @@
+@import "../colors.scss";
+
+.button{
+  background:$primaryColor;
+  color:white;
+  border-radius:5px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  cursor:pointer;
+  margin-left: auto;
+  min-width:60px;
+  padding:8px 12px;
+  font-size:16px;
+  margin-top:4px;
+  margin-bottom:4px;
+}

@@ -17,25 +17,18 @@ passport.use(new Strategy(
     })
   }
 ));
-var authenticate=passport.authenticate('bearer', { session: false });
-
+var use_auth=passport.authenticate('bearer', { session: false });
 
 router.post("/api/v1/users", users_controller.createUser);
 router.post("/api/v1/users/login", users_controller.login);
 
-//register node from Aurora Things
-router.post("/api/v1/nodes/register/:code", objects_controller.registerNode);
+//register node from Aurora Things - use mqtt instead???
+router.get("/api/v1/nodes/register/:code", objects_controller.registerNode);
 
 //needs token authentication
-router.get("/api/v1/state", authenticate, users_controller.getUser)
-router.post("/api/v1/nodes", authenticate, objects_controller.generateNode);
-router.get("/api/v1/nodes/:node/", authenticate, objects_controller.getStatusInfo);
-router.post("/api/v1/nodes/:node/", authenticate, objects_controller.setStatusInfo);
-
-
-router.get('/', function (req, res) {
-  //ready, return the React app
-  res.send("React App with data")
-})
+router.get("/api/v1/state", use_auth, users_controller.getUser)
+router.post("/api/v1/nodes", use_auth, objects_controller.generateNode);
+router.get("/api/v1/nodes/:node/", use_auth, objects_controller.getStatusInfo);
+router.post("/api/v1/nodes/:node/", use_auth, objects_controller.setStatusInfo);
 
 module.exports = router;

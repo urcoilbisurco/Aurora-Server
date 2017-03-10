@@ -1,0 +1,40 @@
+.weather{
+  margin-bottom:8px;
+  color:white;
+  background-size:cover;
+  background-position:50%;
+  margin:8px;
+    border-radius:5px;
+  .main{
+    border-radius:5px;
+    background:rgba(63,81,181,0.8);//$primaryColor;
+    display:flex;
+    padding:16px;
+    flex-direction: column;
+    .temperature{
+      display:flex;
+      align-items: center;
+      flex-direction: row;
+    }
+    &.indoor{
+      background:rgba(96,125,139,0.8);//$primaryColor;
+    }
+  }
+  .title{
+    font-size:20px;
+  }
+  .temp{
+    margin-left:auto;
+    text-align: right;
+    display:flex;
+    flex-direction: column;
+    .temp_value{
+      font-size:25px;
+      font-weight:300;
+    }
+    .temp_description{
+      font-weight:300;
+      font-style:italic;
+    }
+  }
+}

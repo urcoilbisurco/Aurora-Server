@@ -33,9 +33,9 @@ var controller={
     })
   },
   getUser: (req, res) => {
-    Promise.all([db.users.get(req.user.token), db.nodes.query({user:req.user.token})])
+    db.nodes
+    .query({user: req.user.token})
     .then( data => {
-      user=data[0]
       nodes=data[1]
       user.nodes=nodes
       res.json({

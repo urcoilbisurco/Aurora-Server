@@ -1,0 +1,18 @@
+{
+  "name": "Aurora",
+  "short_name": "Aurora",
+  "theme_color": "#3f51b5",
+  "background_color": "#3f51b5",
+  "display": "standalone",
+  "orientation": "portrait",
+  "Scope": "/test/index.html",
+  "start_url": "/test/index.html",
+  "icons": [
+    {
+      "src": "images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "splash_pages": null
+}

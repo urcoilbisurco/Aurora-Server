@@ -45,9 +45,6 @@ var controller={
     .then(function(d){
       return res.json(d);
     })
-    //find code and find associated User
-    //associate name to this object, save info of this object like type (es: switch)
-    //return user uuid & object name. This will be the mqtt url used from the node
   }
 }
 

@@ -1,0 +1,14 @@
+.container{
+  display:flex;
+  flex-direction: column;
+  margin-bottom:16px;
+  margin-top:8px;
+}
+.label{
+  font-size:16px;
+  font-weight:600;
+}
+.input{
+  width:100%;
+  padding:8px 12px;
+}
