@@ -6,16 +6,16 @@ var codes = require('voucher-code-generator');
 
 var controller={
   getStatusInfo: function(req, res){
-    db.nodes.get(req.params.uuid, req.params.node)
+    db.nodes.get(req.user.token, req.params.node)
     .then(function(obj){
       res.json(obj)
     })
   },
   setStatusInfo:function(req,res){
-    db.nodes.updateState(req.params.uuid, req.params.node, req.body)
+    db.nodes.updateState(req.user.token, req.params.node, req.body)
     .then(function(doc){
       res.json(doc);
-      topic=req.params.uuid+"/"+req.params.node+"/update"
+      topic=req.user.token+"/"+req.params.node+"/update"
       console.log("publishing on...", topic)
       mqtt.publish(topic, JSON.stringify(doc))
     })
@@ -34,9 +34,8 @@ var controller={
       charset: "0123456789"
     });
     uuid=uuid()
-    console.log(req.body)
     data={
-      user:req.params.uuid,
+      user:req.user.token,
       name:req.body.name,
       registered:false,
       uuid:uuid,

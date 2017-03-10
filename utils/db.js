@@ -1,21 +1,28 @@
 var mongojs = require('mongojs');
-var mongo = require('mongodb').MongoClient
+var mongo = require('mongodb').MongoClient;
 var env=require("../_env.js");
-
+var ObjectId = require('mongodb').ObjectID;
 var db;
 mongo.connect(env.mongo, function(err, _db) {
-  console.log("Connected successfully to mongodb");
   db=_db;
   db.users= db.collection("users");
   db.nodes = db.collection("nodes");
 });
-var ObjectId = require('mongodb').ObjectId;
 
 module.exports={
+
   users:{
-    get: (id) => {
+    query: (_query, opts) => {
       return new Promise((resolve, reject) => {
-        db.users.findOne({_id:ObjectId(id)},(err, doc) => {
+        q= opts.one ? "findOne" : "find"
+        db.users[q](_query, (err,obj) => {
+          resolve(obj)
+        })
+      })
+    },
+    get: (uuid) => {
+      return new Promise((resolve, reject) => {
+        db.users.findOne({token:uuid},(err, doc) => {
           resolve(doc);
         });
       })
@@ -63,7 +70,6 @@ module.exports={
     },
     query: (_query) => {
       return new Promise((resolve, reject) => {
-        console.log(_query);
         db.nodes.find(_query, (err,obj) => {
           resolve(obj.toArray())
         })
@@ -72,7 +78,6 @@ module.exports={
     get:(user, node) => {
       return new Promise((resolve, reject) => {
         db.nodes.findOne({_id:ObjectId(node), user:user}, (err,obj) => {
-          console.log("obj", obj)
           resolve(obj)
         })
       })
