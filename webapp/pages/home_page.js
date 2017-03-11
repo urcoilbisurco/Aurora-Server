@@ -6,33 +6,44 @@ var Section=require("../components/UI/section/section");
 var HeaderCard=require("../components/header/header_card");
 var WeatherCard=require("../components/temperature/temperature_outdoor");
 var IndoorCard=require("../components/temperature/temperature_indoor");
-
-
+var utils=require("../utils/auth");
+var storage=require("../utils/storage");
 const HomePage = React.createClass({
   contextTypes:{
     router:React.PropTypes.object.isRequired
   },
   componentWillMount:function(){
-    if(!this.props.token){
+    if(!this.state.token){
       this.context.router.push("/auth")
       return;
     }
+    utils.getUserState(this.state.token).then(function(state){
+      console.log("???", state)
+      this.setState(state)
+    }.bind(this))
   },
-  getDefaultProps:function(){
+  getInitialState:function(){
     return {
-      token:undefined,
+      token: storage.get("access_token"),
+      info:{
+        name:""
+      },
+      nodes:[]
     }
   },
   render:function() {
       return (
         <div>
-          <HeaderCard/>
+          <HeaderCard name={this.state.info.name}/>
           <WeatherCard/>
           <IndoorCard />
           <Section title="Controls" direction="horizontal">
-            <SwitchCard name="Star Lights" verb="are" background="star-lights" toggle="stars"/>
-            <SwitchCard name="Main Light" verb="is" background="main-lights" toggle="-"/>
-            <SwitchCard name="TV" verb="is" background="netflix" toggle="tv"/>
+            { this.state.nodes.map((node)=>{
+                return (
+                  <SwitchCard name={node.name} node={node._id} key={node._id} state={node.state} verb="are" background="star-lights" toggle="stars"/>
+                )
+              })
+            }
           </Section>
           <Section title="Scenes" direction="horizontal">
             <SceneCard name="Reading" background="star-lights" toggle="-"/>

@@ -35,12 +35,10 @@ var controller={
   getUser: (req, res) => {
     db.nodes
     .query({user: req.user.token})
-    .then( data => {
-      nodes=data[1]
+    .then( nodes => {
+      user=req.user
       user.nodes=nodes
-      res.json({
-        user:utils.clean(user)
-      })
+      res.json(utils.clean(user))
     })
   },
   createUser: (req,res) => {

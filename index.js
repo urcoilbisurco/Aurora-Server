@@ -32,7 +32,7 @@ if (!env.production) {
   const compiler = webpack(config);
   const middleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
-    contentBase: 'src',
+    contentBase: 'webapp',
     stats: {
       colors: true,
       hash: false,

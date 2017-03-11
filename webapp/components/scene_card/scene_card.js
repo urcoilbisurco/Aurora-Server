@@ -26,15 +26,15 @@ const SceneCard = React.createClass({
     };
   },
   onChange:function(what){
-    n=this.state.on==0 ? 1 : 0
+    let n=this.state.on==0 ? 1 : 0
     this.setState({
       on: n
     })
-    d=(n==1 ? "on" : "off");
+    let d=(n==1 ? "on" : "off");
     utils.setStatus(this.props.toggle, {arg:d})
   },
   render:function() {
-    background={
+    let background={
       "backgroundImage":"url('./src/assets/"+this.props.background+".jpg')",
     }
     return (

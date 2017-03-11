@@ -5,8 +5,13 @@ var cn=require("classnames");
 var css=require("./temperature_card.scss");
 
 function TemperatureCard(props){
-  background={
-    "backgroundImage":'url("./src/assets/'+props.background+'")',
+  // console.log(props)
+  // let url="./assets/"+props.background
+  // console.log(url)
+  // let img=require(url)
+  // console.log(img)
+  let background={
+    "backgroundImage":'url("assets/'+props.background+'")'
   }
   return (
     <div onClick={props.onClick} className={css.weather} style={background}>

@@ -1,43 +1,36 @@
 var React = require('react');
 var Switch= require('../switch/switch');
-var utils=require("../../utils/particle");
+var utils=require("../../utils/switch");
 var css=require("./switch_card.scss");
 
 const SwitchCard = React.createClass({
   componentDidMount:function(){
-    if(this.props.toggle!="-"){
-      utils.getStatus(this.props.toggle)
-      .then(function(state){
-        this.setState({
-          on:state
-        })
-      }.bind(this))
-    }
+    utils.getStatus(this.props.node)
+    .then(function(state){
+      console.log("STATE?", state)
+      this.setState(state.state)
+    }.bind(this))
   },
   getInitialState:function() {
-    return {
-      on:0,
-    };
+    return this.props.state;
   },
   onChange:function(what){
-    n=this.state.on==0 ? 1 : 0
-    this.setState({
-      on: n
-    })
-    d=(n==1 ? "on" : "off");
-    utils.setStatus(this.props.toggle, {arg:d})
+    let change={open: !this.state.open}
+    this.setState(change)
+    utils.setStatus(this.props.node, change)
   },
   render:function() {
-    label=(this.state.on ? "on" : "off");
-    background={
-      "backgroundImage":"url('./src/assets/"+this.props.background+".jpg')",
+    console.log("this", this.state)
+    let label=(this.state.open ? "on" : "off");
+    let background={
+      "backgroundImage":"url('./assets/"+this.props.background+".jpg')",
     }
     return (
       <div className={css.switch_card}>
         <div className={css.main} style={background}>
           <div className={css.text_container}>
             <div className={css.text}>{this.props.name} {this.props.verb} {label}</div>
-            <Switch className={ css.switch } on={this.state.on} onChange={this.onChange} labelOff={"Switch On"} labelOn={"Switch Off"} />
+            <Switch className={ css.switch } open={this.state.open} onChange={this.onChange} labelOff={"Switch On"} labelOn={"Switch Off"} />
           </div>
         </div>
       </div>

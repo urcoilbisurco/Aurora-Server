@@ -1,20 +1,32 @@
 var axios= require("axios");
-var env=require("../_env");
-var milano="45.4668,9.1905"
-var url="http://promozioni-contest.it/test2/crossorigin.php?url=https://api.darksky.net/forecast/"+env.weather_token+"/"+milano+"/?units=si&exclude=minutely,hourly,daily,alerts,flags";
+var storage=require("./storage");
+var access_token=storage.get("access_token")
 
-var helpers={
-  login:function(){
-    return axios.post(url)
+function build_url(url){
+  return ("/api/v1/"+url+"?access_token="+access_token)
+}
+module.exports={
+  getUserState:(access_token)=>{
+    return axios.get(build_url("state")).then((response)=>{
+      return response.data;
+    })
+  },
+  login:function(data){
+    return axios.post("/users/login", data)
     .then(function(response){
       console.log("response", response.data);
-      return {
-        temp:response.data.currently.temperature,
-        descr:response.data.currently.summary,
-      }
+      return response.data
+    }).catch(function(err){
+      console.log("ERROR", err);
+    });
+  },
+  register:function(data){
+    return axios.post("/users", data)
+    .then(function(response){
+      console.log("response", response.data);
+      return response.data
     }).catch(function(err){
       console.log("ERROR", err);
     });
   },
 }
-module.exports=helpers;
