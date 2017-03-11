@@ -1,18 +1,17 @@
 var React = require('react');
 var cn = require('classnames');
-var utils=require("../../utils/particle");
 var css=require("./scene_card.scss");
 
 const SceneCard = React.createClass({
   componentDidMount:function(){
-    if(this.props.toggle!="-"){
-      utils.getStatus(this.props.toggle)
-      .then(function(state){
-        this.setState({
-          on:state
-        })
-      }.bind(this))
-    }
+    // if(this.props.toggle!="-"){
+    //   utils.getStatus(this.props.toggle)
+    //   .then(function(state){
+    //     this.setState({
+    //       on:state
+    //     })
+    //   }.bind(this))
+    // }
   },
   onClick:function(){
     this.setState({
@@ -31,7 +30,7 @@ const SceneCard = React.createClass({
       on: n
     })
     let d=(n==1 ? "on" : "off");
-    utils.setStatus(this.props.toggle, {arg:d})
+    //utils.setStatus(this.props.toggle, {arg:d})
   },
   render:function() {
     let background={
