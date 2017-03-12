@@ -44,8 +44,8 @@ var controller={
   createUser: (req,res) => {
     db.users
     .query({email:req.body.email}, {one:true})
-    .then( (existingUsers)=> {
-      if(existingUsers.length>0){
+    .then( (existingUser)=> {
+      if(existingUser){
         return res.json(400, {error:"user already exists with this email."})
       }
       bcrypt

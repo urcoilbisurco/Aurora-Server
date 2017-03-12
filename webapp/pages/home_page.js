@@ -13,15 +13,18 @@ const HomePage = React.createClass({
     router:React.PropTypes.object.isRequired
   },
   componentDidMount:function(){
-    utils.getUserState(this.state.token).then(function(state){
-      console.log("???", state)
-      this.setState(state)
-    }.bind(this))
     if(!this.state.token){
       this.context.router.push("/auth")
+    }else{
+      console.log("get User State???", this.state.token)
+      utils.getUserState(this.state.token).then(function(state){
+        console.log("???", state)
+        this.setState(state)
+      }.bind(this))
     }
   },
   getInitialState:function(){
+    console.log("getInitialState", storage.get("access_token"))
     return {
       token: storage.get("access_token"),
       info:{

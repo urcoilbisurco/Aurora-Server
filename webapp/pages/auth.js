@@ -4,6 +4,7 @@ var auth_utils= require("../utils/auth");
 var storage=require("../utils/storage");
 var Input= require("../components/UI/input/input");
 var Button= require("../components/UI/button/button");
+import {notify} from 'react-notify-toast';
 
 const AuthPage = React.createClass({
   contextTypes:{
@@ -20,7 +21,6 @@ const AuthPage = React.createClass({
     })
   },
   handleClick:function(){
-    this.context.router.push("/")
     if(this.state.login){
       //handle login
       auth_utils
@@ -32,8 +32,8 @@ const AuthPage = React.createClass({
           this.context.router.push("/")
         },500)
       })
-      .catch((error)=>{
-        console.log(error);
+      .catch((error, data)=>{
+        notify.show('Wrong password.', "error");
       })
       //
     }else{
@@ -41,7 +41,11 @@ const AuthPage = React.createClass({
       auth_utils
       .register({email:this.input_email.value(), password:this.input_password.value(), name:this.input_name.value()})
       .then((response)=>{
-        test
+        storage.set("access_token", response.user.token)
+        setTimeout(()=>{
+          //USE redux?
+          this.context.router.push("/")
+        },500)
       })
       .catch((error)=>{
 
@@ -55,7 +59,7 @@ const AuthPage = React.createClass({
     return (
       <div>
         <h3>{title}</h3>
-        <Input label="Email" value="urcoilbisurco@gmail.com"ref={(ref) => this.input_email = ref} />
+        <Input label="Email" value="test@gmail.com"ref={(ref) => this.input_email = ref} />
         {!this.state.login &&
           <Input label="Name" ref={(ref) => this.input_name = ref} />
         }

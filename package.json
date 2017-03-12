@@ -7,7 +7,7 @@
     "start": "supervisor -i webapp index.js ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "restart": "forever restart index.js",
-    "build":"webpack -p"
+    "build": "webpack -p"
   },
   "author": "Francesco Marassi",
   "license": "ISC",
@@ -31,6 +31,7 @@
     "passport-http-bearer": "^1.0.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-notify-toast": "^0.1.5",
     "react-router": "^3.0.2",
     "react-trend": "^1.2.2",
     "sass-loader": "^6.0.3",
