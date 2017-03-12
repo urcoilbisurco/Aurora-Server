@@ -13,12 +13,12 @@ var utils={
 var controller={
   login:(req, res)=>{
     db.users
-    .query({email:req.body.email})
-    .then( (existingUsers) => {
-      if(existingUsers.length==0){
+    .query({email:req.body.email}, {one:true})
+    .then( (existingUser) => {
+      if(!existingUser){
         return res.json(400, {error:"Can't find user with this email."})
       }
-      user=existingUsers[0]
+      user=existingUser
       bcrypt
       .compare(req.body.password, user.password)
       .then( (compare_result) => {
@@ -27,7 +27,7 @@ var controller={
             user:utils.clean(user)
           })
         }else{
-          return res.json(400, {error:"Wrong Password."})
+          return res.status(400).json({error:"Wrong Password."})
         }
       });
     })
@@ -43,7 +43,7 @@ var controller={
   },
   createUser: (req,res) => {
     db.users
-    .query({email:req.body.email})
+    .query({email:req.body.email}, {one:true})
     .then( (existingUsers)=> {
       if(existingUsers.length>0){
         return res.json(400, {error:"user already exists with this email."})
