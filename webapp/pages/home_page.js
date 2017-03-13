@@ -20,6 +20,9 @@ const HomePage = React.createClass({
       utils.getUserState(this.state.token).then(function(state){
         console.log("???", state)
         this.setState(state)
+      }.bind(this)).catch(function(err){
+        console.log("catch?")
+        this.context.router.push("/auth")
       }.bind(this))
     }
   },

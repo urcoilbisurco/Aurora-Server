@@ -10,7 +10,10 @@ module.exports={
   getUserState:(access_token)=>{
     return axios.get(build_url("/state", access_token)).then((response)=>{
       return response.data;
-    })
+    }).catch(function(err){
+      console.log("ERROR", err);
+      return err;
+    });
   },
   login:function(data){
     return axios.post(build_url("/users/login"), data)

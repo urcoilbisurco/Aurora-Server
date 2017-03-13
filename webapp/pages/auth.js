@@ -59,11 +59,11 @@ const AuthPage = React.createClass({
     return (
       <div>
         <h3>{title}</h3>
-        <Input label="Email" value="test@gmail.com"ref={(ref) => this.input_email = ref} />
+        <Input label="Email" ref={(ref) => this.input_email = ref} />
         {!this.state.login &&
           <Input label="Name" ref={(ref) => this.input_name = ref} />
         }
-        <Input label="Password" type="password" value="francesco" ref={(ref) => this.input_password = ref} />
+        <Input label="Password" type="password"  ref={(ref) => this.input_password = ref} />
         <Button onClick={this.handleClick}>{title}</Button>
         <Button onClick={this.handleForm}>{alter_button} instead</Button>
       </div>
