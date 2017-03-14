@@ -42,7 +42,7 @@ const HomePage = React.createClass({
         <Section title="Controls" direction="horizontal">
           { this.state.nodes.map((node)=>{
               return (
-                <SwitchCard name={node.name} node={node._id} key={node._id} state={node.state} verb="are" background="star-lights" toggle="stars"/>
+                <SwitchCard name={node.name} node={node._id} key={node._id} state={node.state} verb="is" background="star-lights" toggle="stars"/>
               )
             })
           }

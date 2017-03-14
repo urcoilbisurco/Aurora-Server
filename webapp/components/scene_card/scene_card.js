@@ -34,7 +34,7 @@ const SceneCard = React.createClass({
   },
   render:function() {
     let background={
-      "backgroundImage":"url('./src/assets/"+this.props.background+".jpg')",
+      "backgroundImage":"url('./assets/"+this.props.background+".jpg')",
     }
     return (
       <div className={css.scene_card} onClick={this.onClick}>

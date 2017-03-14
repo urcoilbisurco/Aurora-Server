@@ -31,7 +31,7 @@ if (!env.production) {
   const config = require('./webpack.config.js');
   const compiler = webpack(config);
   const middleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
+    publicPath: config.output.devAssetsPath,
     contentBase: 'webapp',
     stats: {
       colors: true,
@@ -49,6 +49,10 @@ if (!env.production) {
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
     res.end();
   });
+  app.use(express.static(__dirname + '/webapp/dist'));
+  // app.get('/manifest.json', function response(req, res) {
+  //   res.sendFile(path.join(__dirname, 'webapp/dist/manifest.json'));
+  // });
 } else {
   app.use(express.static(__dirname + '/webapp/dist'));
   app.get('/', function response(req, res) {
