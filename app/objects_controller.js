@@ -21,8 +21,7 @@ var controller={
     })
   },
   registerNode:function(req,res){
-    db
-    .nodes.register(req.params.code)
+    db.nodes.register(req.params.code, req.params.type)
     .then(function(node){
       res.json(node);
     })

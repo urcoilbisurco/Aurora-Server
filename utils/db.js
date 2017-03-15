@@ -44,11 +44,11 @@ module.exports={
         })
       })
     },
-    register:(code, values, cb) => {
+    register:(code, type) => {
       return new Promise((resolve, reject) => {
         db.nodes.findOneAndUpdate(
           {code:code},
-          {$set: {registered:true}},
+          {$set: {registered:true, type:type}},
           {returnOriginal:false},
           (err, doc) =>  {
             resolve(doc.value)
