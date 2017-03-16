@@ -5,43 +5,43 @@ var codes = require('voucher-code-generator');
 
 
 var controller={
-  getData:function(req, res){
+  getData:(req, res)=>{
     db.data.get({node: req.params.node}, {limit:10})
-    .then(function(objs){
+    .then((objs)=>{
       res.json(objs)
     })
   },
-  addData:function(req, res){
+  addData:(req, res)=>{
     data=req.body
-    data.created_at=new Date();
+    data.created_at=new Date()
     data.node=req.params.node
     db.data.addOne(data)
-    .then(function(obj){
+    .then((obj)=>{
       res.json(obj)
     })
   },
-  getStatusInfo: function(req, res){
+  getStatusInfo: (req, res)=>{
     db.nodes.get(req.user.token, req.params.node)
-    .then(function(obj){
+    .then((obj)=>{
       res.json(obj)
     })
   },
-  setStatusInfo:function(req,res){
+  setStatusInfo:(req,res)=>{
     db.nodes.updateState(req.user.token, req.params.node, req.body)
-    .then(function(doc){
+    .then((doc)=>{
       res.json(doc);
       topic=req.user.token+"/"+req.params.node+"/update"
       console.log("publishing on...", topic)
       mqtt.publish(topic, JSON.stringify(doc.state))
     })
   },
-  registerNode:function(req,res){
+  registerNode:(req,res)=>{
     db.nodes.register(req.params.code, req.params.type)
-    .then(function(node){
+    .then((node)=>{
       res.json(node);
     })
   },
-  generateNode:function(req,res){
+  generateNode:(req,res)=>{
     code=codes.generate({
       length: 4,
       count: 1,
@@ -56,7 +56,7 @@ var controller={
       code: code[0]
     }
     db.nodes.generate(data)
-    .then(function(d){
+    .then((d)=>{
       return res.json(d);
     })
   }

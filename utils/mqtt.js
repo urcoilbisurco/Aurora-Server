@@ -3,11 +3,11 @@ var db = require('../utils/db');
 var env=require("../_env.js");
 var client  = mqtt.connect(env.mqtt_server);
 
-client.on("connect", function(){
+client.on("connect", ()=>{
   client.subscribe("+/+/updated")
 });
 
-client.on("message", function(topic,message){
+client.on("message", (topic,message)=>{
   if(topic.includes("updated")){
     update(topic, message.toString());
   }

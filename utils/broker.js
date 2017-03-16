@@ -21,12 +21,12 @@ var moscaSettings = {
 var server = new mosca.Server(moscaSettings);
 server.on('ready', setup);
 
-server.on('clientConnected', function(client) {
+server.on('clientConnected', (client) =>{
     console.log('client connected', client.id);
 });
 
 // fired when a message is received
-server.on('published', function(packet, client) {
+server.on('published', (packet, client)=>{
   console.log('Published', packet.payload);
 });
 
