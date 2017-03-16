@@ -7,10 +7,10 @@ mongo.connect(env.mongo, function(err, _db) {
   db=_db;
   db.users= db.collection("users");
   db.nodes = db.collection("nodes");
+  db.data = db.collection("data");
 });
 
 module.exports={
-
   users:{
     query: (_query, opts) => {
       return new Promise((resolve, reject) => {
@@ -32,6 +32,22 @@ module.exports={
         db.users.insert(data, (err,doc) => {
           console.log(doc.ops[0])
           resolve(doc.ops[0])
+        })
+      })
+    },
+  },
+  data:{
+    addOne:(data)=>{
+      return new Promise((resolve, reject) =>{
+        db.data.insert(data, (err,doc)=>{
+          resolve(doc.ops[0])
+        })
+      })
+    },
+    get:(_query, opts={})=>{
+      return new Promise((resolve, reject) =>{
+        db.nodes.find(_query, {}, opts, (err,obj) => {
+          resolve(obj.toArray())
         })
       })
     },

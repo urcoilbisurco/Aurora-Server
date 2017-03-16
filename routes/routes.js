@@ -28,6 +28,8 @@ router.get("/api/v1/nodes/register/:code/:type", objects_controller.registerNode
 //needs token authentication
 router.get("/api/v1/state", use_auth, users_controller.getUser)
 router.post("/api/v1/nodes", use_auth, objects_controller.generateNode);
+router.post("/api/v1/nodes/:node/data", use_auth, objects_controller.addData);
+router.get("/api/v1/nodes/:node/data", use_auth, objects_controller.getData);
 router.get("/api/v1/nodes/:node/", use_auth, objects_controller.getStatusInfo);
 router.post("/api/v1/nodes/:node/", use_auth, objects_controller.setStatusInfo);
 
