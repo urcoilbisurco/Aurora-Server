@@ -46,7 +46,9 @@ module.exports={
     },
     get:(_query, opts={})=>{
       return new Promise((resolve, reject) =>{
-        db.nodes.find(_query, {}, opts, (err,obj) => {
+        console.log("query?", _query);
+        opts.sort=[["created_at","desc"]]
+        db.data.find(_query, {}, opts, (err,obj) => {
           resolve(obj.toArray())
         })
       })
