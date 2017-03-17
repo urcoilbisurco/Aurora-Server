@@ -1,0 +1,18 @@
+.container{
+  padding:16px;
+  display: flex;
+  flex-direction: column;
+  padding-top:24px;
+  .icon{
+    font-size:32px;
+    color:#666;
+    width: 58px;
+    height: 58px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 999em;
+    background: rgba(0,0,0,0.04);
+
+  }
+}

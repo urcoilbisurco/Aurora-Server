@@ -1,0 +1,46 @@
+@import "../colors.scss";
+
+.image_container{
+  display:flex;
+  overflow-x: scroll;
+  height:200px;
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+  }
+}
+.label{
+  color:#666;
+  font-size:19px;
+  font-weight:300;
+  margin-bottom:8px;
+  display:block;
+}
+.image{
+  min-width:130px;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position: 50%;
+  margin:8px 4px;
+  border-radius:5px;
+  position:relative;
+  // .overlay{
+  //   border-radius:5px;
+  //   background:rgba(63, 81, 181, .5);
+  //   position:absolute;
+  //   left:0;
+  //   top:0;
+  //   bottom:0;
+  //   right:0;
+  //   opacity:0;
+  // }
+  &.selected{
+    border:8px solid $primaryColor;
+  }
+  // &.selected .overlay{
+  //   opacity:1;
+  // }
+}

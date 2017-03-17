@@ -47,6 +47,7 @@ if (!env.production) {
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
   app.get('/', function response(req, res) {
+    console.log(path.join(__dirname, 'dist/index.html'))
     res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
     res.end();
   });
@@ -54,6 +55,7 @@ if (!env.production) {
   // app.get('/manifest.json', function response(req, res) {
   //   res.sendFile(path.join(__dirname, 'webapp/dist/manifest.json'));
   // });
+
 } else {
   app.use(express.static(__dirname + '/webapp/dist'));
   app.get('/', function response(req, res) {

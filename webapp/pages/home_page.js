@@ -8,6 +8,8 @@ var WeatherCard=require("../components/temperature/temperature_outdoor");
 var IndoorCard=require("../components/temperature/temperature_indoor");
 var utils=require("../utils/auth");
 var storage=require("../utils/storage");
+import { Link } from 'react-router-dom'
+
 const HomePage = React.createClass({
   contextTypes:{
     router:React.PropTypes.object.isRequired
@@ -51,6 +53,7 @@ const HomePage = React.createClass({
           <SceneCard name="Reading" background="star-lights" toggle="-"/>
           <SceneCard name="Telefilm" background="main-lights" toggle="-"/>
         </Section>
+        <Link to="/nodes">Manage Nodes</Link>
       </div>
     );
 

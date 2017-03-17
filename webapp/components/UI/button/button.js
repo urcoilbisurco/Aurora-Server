@@ -5,9 +5,9 @@ var css=require("./button.scss");
 const Button = React.createClass({
   render:function() {
     return (
-      <div className={cn(css.button, css.normal)} onClick={this.props.onClick}>
+      <a className={css[this.props.type]} onClick={this.props.onClick}>
         {this.props.children}
-      </div>
+      </a>
     );
   },
 });

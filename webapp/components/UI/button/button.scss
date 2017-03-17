@@ -8,10 +8,34 @@
   align-items: center;
   justify-content: center;
   cursor:pointer;
-  margin-left: auto;
   min-width:60px;
   padding:8px 12px;
   font-size:16px;
   margin-top:4px;
   margin-bottom:4px;
+}
+.button-left{
+  composes:button;
+  margin-left:auto;
+}
+.block{
+  composes:button;
+  width:100%;
+}
+.link{
+  color:$primaryColor;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  cursor:pointer;
+  padding:8px 12px;
+  font-size:16px;
+  margin-top:4px;
+  margin-bottom:4px;
+}
+.circle{
+  composes:button;
+  width:60px;
+  height:60px;
+  border-radius:999em;
 }

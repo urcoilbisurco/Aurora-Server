@@ -1,19 +1,25 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var hashHistory = ReactRouter.hashHistory;
-var IndexRoute = ReactRouter.IndexRoute;
+var ReactRouter = require('react-router-dom');
+import {
+  HashRouter as Router,
+  Route,
+  IndexRoute
+} from 'react-router-dom'
+// var Router = ReactRouter.Router;
+// var Route = ReactRouter.Route;
+// var hashHistory = ReactRouter.hashHistory;
+// var IndexRoute = ReactRouter.IndexRoute;
 var Layout = require("../pages/layout");
-var HomePage = require("../pages/home_page");
-var Auth = require("../pages/auth");
-
+var Home = require("../pages/home_page");
+var Auth = require("../pages/auth/index.js");
+var Nodes = require("../pages/nodes");
 var routes = (
-  <Router history={hashHistory}>
-    <Route path='/' component={Layout}>
-      <IndexRoute component={HomePage}/>
+  <Router>
+    <div>
+      <Route exact path='/' component={Home}/>
       <Route path='/auth' component={Auth}/>
-    </Route>
+      <Route path='/nodes' component={Nodes}/>
+    </div>
   </Router>
 );
 

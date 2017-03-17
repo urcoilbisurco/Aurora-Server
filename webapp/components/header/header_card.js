@@ -41,10 +41,11 @@ const HeaderCard = React.createClass({
 
   render:function() {
     var hi=this.sayHi(this.props.name);
+    // <Time/>
     return (
       <div className={css.header}>
         <div className={css.main}>
-          <Time/>
+
           <div className={css.title}>
             {hi}
           </div>

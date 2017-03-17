@@ -1,10 +1,12 @@
 var React = require('react');
 var Redirect = require('react-router').Redirect;
-var auth_utils= require("../utils/auth");
-var storage=require("../utils/storage");
-var Input= require("../components/UI/input/input");
-var Button= require("../components/UI/button/button");
+var css=require("./auth.scss");
+var auth_utils= require("../../utils/auth");
+var storage=require("../../utils/storage");
+var Input= require("../../components/UI/input/input");
+var Button= require("../../components/UI/button/button");
 import {notify} from 'react-notify-toast';
+var Container=require("../../components/UI/page_container/index");
 
 const AuthPage = React.createClass({
   contextTypes:{
@@ -57,16 +59,18 @@ const AuthPage = React.createClass({
     var title= this.state.login ? "Login" : "Register"
     var alter_button= !this.state.login ? "Login" : "Register"
     return (
-      <div>
-        <h3>{title}</h3>
-        <Input label="Email" ref={(ref) => this.input_email = ref} />
-        {!this.state.login &&
-          <Input label="Name" ref={(ref) => this.input_name = ref} />
-        }
-        <Input label="Password" type="password"  ref={(ref) => this.input_password = ref} />
-        <Button onClick={this.handleClick}>{title}</Button>
-        <Button onClick={this.handleForm}>{alter_button} instead</Button>
-      </div>
+      <Container>
+        <div className={css.container}>
+          <h3>{title}</h3>
+          <Input label="Email" ref={(ref) => this.input_email = ref} />
+          {!this.state.login &&
+            <Input label="Name" ref={(ref) => this.input_name = ref} />
+          }
+          <Input label="Password" type="password"  ref={(ref) => this.input_password = ref} />
+          <Button type="button" onClick={this.handleClick}>{title}</Button>
+          <Button type="link" onClick={this.handleForm}>{alter_button} instead</Button>
+        </div>
+      </Container>
     );
   },
 });

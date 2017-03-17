@@ -51,6 +51,7 @@ var controller={
     data={
       user:req.user.token,
       name:req.body.name,
+      image:req.body.image,
       registered:false,
       uuid:uuid,
       code: code[0]
