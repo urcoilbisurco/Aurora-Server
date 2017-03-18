@@ -4,7 +4,6 @@ var cn=require("classnames");
 
 
 var Section=function(props){
-  console.log("horizontal", props.direction=="horizontal")
   return (
     <div className={cn(css.section)}>
       <div className={css.section_title}>{props.title}</div>

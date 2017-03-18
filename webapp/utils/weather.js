@@ -1,20 +1,16 @@
 var axios= require("axios");
-var env=require("../_env");
-var milano="45.4668,9.1905"
-var url="/weather?url=https://api.darksky.net/forecast/"+env.weather_token+"/"+milano+"/?units=si&exclude=minutely,hourly,daily,alerts,flags";
+var storage=require("./storage");
+var access_token=storage.get("access_token")
+var url="/api/v1/weather";
+
+function build_url(url, token=null){
+  let t=token || access_token
+  return ("/api/v1"+url+"?access_token="+t)
+}
 
 var helpers={
   getWeather:function(){
-    return axios.get(url)
-    .then(function(response){
-      console.log("response", response.data);
-      return {
-        temp:response.data.currently.temperature,
-        descr:response.data.currently.summary,
-      }
-    }).catch(function(err){
-      console.log("ERROR", err);
-    });
+    return axios.get(build_url("/weather"))
   },
 }
 module.exports=helpers;

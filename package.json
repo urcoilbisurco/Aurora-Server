@@ -4,7 +4,7 @@
   "description": "Express.js server to handle state of IoT applications",
   "main": "index.js",
   "scripts": {
-    "start": "supervisor -i webapp index.js ",
+    "start": "supervisor -i webapp,node_modules index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "restart": "forever restart index.js",
     "build": "webpack -p"
@@ -25,6 +25,7 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "react": "^15.4.2",
+    "react-anime": "^0.3.4",
     "react-dom": "^15.4.2",
     "react-icons": "^2.2.3",
     "react-notify-toast": "^0.1.5",

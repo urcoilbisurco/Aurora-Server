@@ -8,6 +8,8 @@ var WeatherCard=require("../components/temperature/temperature_outdoor");
 var IndoorCard=require("../components/temperature/temperature_indoor");
 var utils=require("../utils/auth");
 var storage=require("../utils/storage");
+var Anime = require("react-anime").default;
+
 import { Link } from 'react-router-dom'
 
 const HomePage = React.createClass({
@@ -39,21 +41,32 @@ const HomePage = React.createClass({
     return (
       <div>
         <HeaderCard name={this.state.info.name}/>
-        <WeatherCard/>
-        <IndoorCard />
-        <Section title="Controls" direction="horizontal">
-          { this.state.nodes.map((node)=>{
-              return (
-                <SwitchCard name={node.name} node={node._id} key={node._id} state={node.state} verb="is" background="star-lights" toggle="stars"/>
-              )
-            })
-          }
-        </Section>
-        <Section title="Scenes" direction="horizontal">
-          <SceneCard name="Reading" background="star-lights" toggle="-"/>
-          <SceneCard name="Telefilm" background="main-lights" toggle="-"/>
-        </Section>
-        <Link to="/nodes">Manage Nodes</Link>
+        <Anime opacity={[0, 1]} duration={1000} translateY={['-1em','0em']} delay={(e, i) => i * 300}>
+        <div>
+          <WeatherCard/>
+          <IndoorCard />
+        </div>
+        <div>
+          <Section title="Controls" direction="horizontal">
+            { this.state.nodes.map((node)=>{
+                return (
+
+                  <SwitchCard name={node.name} node={node._id} key={node._id} state={node.state} verb="is" background="star-lights" toggle="stars"/>
+                )
+              })
+            }
+          </Section>
+        </div>
+        <div>
+          <Section title="Scenes" direction="horizontal">
+            <SceneCard name="Reading" background="star-lights" toggle="-"/>
+            <SceneCard name="Telefilm" background="main-lights" toggle="-"/>
+          </Section>
+          <div class="settings">
+            <Link to="/nodes">Add new node</Link>
+          </div>
+      </div>
+      </Anime>
       </div>
     );
 
