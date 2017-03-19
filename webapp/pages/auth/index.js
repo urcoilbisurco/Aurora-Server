@@ -31,7 +31,7 @@ const AuthPage = React.createClass({
         console.log("response", response)
         storage.set("access_token", response.user.token)
         setTimeout(()=>{
-          this.context.router.push("/")
+          this.context.router.history.push("/")
         },500)
       })
       .catch((error, data)=>{
@@ -46,7 +46,7 @@ const AuthPage = React.createClass({
         storage.set("access_token", response.user.token)
         setTimeout(()=>{
           //USE redux?
-          this.context.router.push("/")
+          this.context.router.history.push("/")
         },500)
       })
       .catch((error)=>{

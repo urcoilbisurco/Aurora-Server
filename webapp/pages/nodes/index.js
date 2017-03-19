@@ -28,6 +28,7 @@ const NodesPage = React.createClass({
     .then((response)=>{
       notify.show('Node created.');
       console.log("????????????", response)
+      this.context.router.history.push("/")
     })
     .catch((error, data)=>{
       notify.show('Wrong password.', "error");

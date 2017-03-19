@@ -1,5 +1,4 @@
 var React = require('react');
-var Redirect = require('react-router').Redirect;
 var SwitchCard=require("../components/switch_card/switch_card");
 var SceneCard=require("../components/scene_card/scene_card");
 var Section=require("../components/UI/section/section");
@@ -18,7 +17,9 @@ const HomePage = React.createClass({
   },
   componentDidMount:function(){
     if(!this.state.token){
-      this.context.router.push("/auth")
+      this.context.router.history.push("/auth");
+    //  this.transitionTo("/auth")
+
     }else{
       console.log("get User State???", this.state.token)
       utils.getUserState(this.state.token).then(function(state){
@@ -62,7 +63,7 @@ const HomePage = React.createClass({
             <SceneCard name="Reading" background="star-lights" toggle="-"/>
             <SceneCard name="Telefilm" background="main-lights" toggle="-"/>
           </Section>
-          <div class="settings">
+          <div className="settings">
             <Link to="/nodes">Add new node</Link>
           </div>
       </div>

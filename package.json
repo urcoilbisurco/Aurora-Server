@@ -7,7 +7,7 @@
     "start": "supervisor -i webapp,node_modules index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "restart": "forever restart index.js",
-    "build": "webpack -p"
+    "build": "NODE_ENV=production webpack -p"
   },
   "author": "Francesco Marassi",
   "license": "ISC",
