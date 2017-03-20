@@ -31,7 +31,7 @@ const AuthPage = React.createClass({
         console.log("response", response)
         storage.set("access_token", response.user.token)
         setTimeout(()=>{
-          this.context.router.history.push("/")
+          this.context.router.history.replace("/")
         },500)
       })
       .catch((error, data)=>{

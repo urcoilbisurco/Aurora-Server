@@ -8,40 +8,30 @@ var IndoorCard=require("../components/temperature/temperature_indoor");
 var utils=require("../utils/auth");
 var storage=require("../utils/storage");
 var Anime = require("react-anime").default;
-
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import store from '../store';
 
 const HomePage = React.createClass({
   contextTypes:{
     router:React.PropTypes.object.isRequired
   },
   componentDidMount:function(){
-    if(!this.state.token){
+    if(!this.props.token){
       this.context.router.history.push("/auth");
-    //  this.transitionTo("/auth")
-
     }else{
-      console.log("get User State???", this.state.token)
-      utils.getUserState(this.state.token).then(function(state){
-        console.log("???", state)
-        this.setState(state)
+      utils.getUserState(this.props.token).then(function(state){
+        store.dispatch({
+          type: 'GET_USER_STATE',
+          payload:state
+        })
       }.bind(this))
-    }
-  },
-  getInitialState:function(){
-    console.log("getInitialState", storage.get("access_token"))
-    return {
-      token: storage.get("access_token"),
-      info:{
-        name:""
-      },
-      nodes:[]
     }
   },
   render:function() {
     return (
       <div>
-        <HeaderCard name={this.state.info.name}/>
+        <HeaderCard name={this.props.info.name}/>
         <Anime opacity={[0, 1]} duration={1000} translateY={['-1em','0em']} delay={(e, i) => i * 300}>
         <div>
           <WeatherCard/>
@@ -49,9 +39,8 @@ const HomePage = React.createClass({
         </div>
         <div>
           <Section title="Controls" direction="horizontal">
-            { this.state.nodes.map((node)=>{
+            { this.props.nodes.map((node)=>{
                 return (
-
                   <SwitchCard name={node.name} node={node._id} key={node._id} state={node.state} verb="is" background="star-lights" toggle="stars"/>
                 )
               })
@@ -74,4 +63,14 @@ const HomePage = React.createClass({
   },
 });
 
-module.exports=HomePage;
+const mapStateToProps = function(state) {
+  return state || {
+    token: storage.get("access_token"),
+    info:{
+      name:""
+    },
+    nodes:[]
+  };
+}
+
+module.exports=connect(mapStateToProps)(HomePage);
