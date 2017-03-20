@@ -57,6 +57,7 @@ if (!env.production) {
     res.end();
   });
 } else {
+  app.use(compression());
   app.use(express.static(__dirname + '/webapp/dist'));
   app.get('/', function response(req, res, next) {
     if (req.xhr) { return next();}

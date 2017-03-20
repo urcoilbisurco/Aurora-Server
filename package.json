@@ -16,6 +16,7 @@
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.0",
     "classnames": "^2.2.5",
+    "compression": "^1.6.2",
     "express": "^4.15.0",
     "mongodb": "^2.2.24",
     "mongojs": "^2.4.0",

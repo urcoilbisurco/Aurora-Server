@@ -1,4 +1,8 @@
 /node_modules/*
+/webapp/dist/main.js
+/webapp/dist/main.js.gz
+/webapp/dist/main.js.map
+/webapp/dist/common.js.js
 _env.js
 */_env.js
 *.log
