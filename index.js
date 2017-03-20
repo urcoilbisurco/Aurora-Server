@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var passport=require("passport");
 var morgan  = require('morgan')
 var path=require("path");
+var compression  = require('compression')
 
 var env=require("./_env");
 var broker=require("./utils/broker");
