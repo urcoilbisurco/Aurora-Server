@@ -32,16 +32,19 @@ self.addEventListener('activate', function(e) {
 function cache_on_fail_fetch(request){
   return fetch(request)
   .then(function(r){
-    cache.put(request.url, r.clone());
-    return r;
+    return caches.open(dataCacheName)
+    .then(function(cache) {
+      cache.put(request.url, r.clone());
+      return r;
+    })
   })
-  .catch(function() {
-    caches.match(request).then(function(response) {
+  .catch(function(e) {
+    return caches.match(request).then(function(response) {
       if(response){
         return response;
       }
+    })
   })
-})
 }
 
 //network then cache strategy
@@ -79,7 +82,7 @@ self.addEventListener('fetch', function(e) {
         return e.respondWith(fetch(e.request));
       }else{
         //network then cache for files like API calls
-        if(url.indexOf("api")>-1){
+        if(url.indexOf("/api")>-1){
           e.respondWith(cache_on_fail_fetch(e.request));
         }else{
           //the request is inside app shell? return immediately the cache
@@ -89,9 +92,7 @@ self.addEventListener('fetch', function(e) {
             })
           );
         }
-
       }
-
     }
   }else{
     fetch(e.request)
