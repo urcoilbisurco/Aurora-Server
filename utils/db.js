@@ -1,7 +1,6 @@
 var mongojs = require('mongojs');
 var mongo = require('mongodb').MongoClient;
 var env=require("../_env.js");
-var ObjectId = require('mongodb').ObjectID;
 var db;
 mongo.connect(env.mongo, function(err, _db) {
   db=_db;
@@ -77,7 +76,7 @@ module.exports={
     updateState:(user, node, values) => {
       return new Promise((resolve, reject) => {
         db.nodes.findOneAndUpdate(
-          {_id:ObjectId(node), user:user},
+          {uuid:node, user:user},
           {$set:{state:values}},
           {returnOriginal:false},
           (err, doc) =>  {
@@ -95,7 +94,7 @@ module.exports={
     },
     get:(user, node) => {
       return new Promise((resolve, reject) => {
-        db.nodes.findOne({_id:ObjectId(node), user:user}, (err,obj) => {
+        db.nodes.findOne({uuid:node, user:user}, (err,obj) => {
           resolve(obj)
         })
       })

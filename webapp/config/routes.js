@@ -13,6 +13,7 @@ var Layout = require("../pages/layout");
 var Home = require("../pages/home_page");
 var Auth = require("../pages/auth/index.js");
 var Nodes = require("../pages/nodes");
+
 var routes = (
   <Router>
     <div>

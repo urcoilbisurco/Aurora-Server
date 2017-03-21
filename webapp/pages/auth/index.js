@@ -1,6 +1,7 @@
 var React = require('react');
 var Redirect = require('react-router').Redirect;
 var css=require("./auth.scss");
+import store from '../../store';
 var auth_utils= require("../../utils/auth");
 var storage=require("../../utils/storage");
 var Input= require("../../components/UI/input/input");
@@ -30,8 +31,13 @@ const AuthPage = React.createClass({
       .then((response)=>{
         console.log("response", response)
         storage.set("access_token", response.user.token)
+        store.dispatch({
+          type: 'LOGIN',
+          payload:response.user
+        })
         setTimeout(()=>{
-          this.context.router.history.replace("/")
+          //USE redux?
+          this.context.router.history.push("/")
         },500)
       })
       .catch((error, data)=>{
@@ -58,6 +64,7 @@ const AuthPage = React.createClass({
   render:function() {
     var title= this.state.login ? "Login" : "Register"
     var alter_button= !this.state.login ? "Login" : "Register"
+    console.log("RENDER?")
     return (
       <Container>
         <div className={css.container}>

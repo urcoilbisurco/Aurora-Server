@@ -17,8 +17,9 @@ const HomePage = React.createClass({
     router:React.PropTypes.object.isRequired
   },
   componentDidMount:function(){
-    if(!this.props.token){
-      this.context.router.history.push("/auth");
+    this.setState({rendered:true})
+    if(!this.props.user.authenticated){
+      this.context.router.history.push("/auth")
     }else{
       utils.getUserState(this.props.token).then(function(state){
         store.dispatch({
@@ -28,11 +29,25 @@ const HomePage = React.createClass({
       }.bind(this))
     }
   },
+  getInitialState:function(){
+    return {
+      rendered:false
+    }
+  },
+  getDefaultProps:function(){
+    return {
+      token: storage.get("access_token"),
+      info:{
+        name:""
+      },
+      nodes:[]
+    };
+  },
   render:function() {
     return (
       <div>
         <HeaderCard name={this.props.info.name}/>
-        <Anime opacity={[0, 1]} duration={1000} translateY={['-1em','0em']} delay={(e, i) => i * 300}>
+        <Anime autoplay={!this.state.rendered} opacity={[0, 1]} duration={1000} translateY={['-1em','0em']} delay={(e, i) => i * 300}>
         <div>
           <WeatherCard/>
           <IndoorCard />
@@ -40,6 +55,7 @@ const HomePage = React.createClass({
         <div>
           <Section title="Controls" direction="horizontal">
             { this.props.nodes.map((node)=>{
+              console.log("NODE STATE", node.state)
                 return (
                   <SwitchCard name={node.name} node={node._id} key={node._id} state={node.state} verb="is" background="star-lights" toggle="stars"/>
                 )
@@ -64,13 +80,7 @@ const HomePage = React.createClass({
 });
 
 const mapStateToProps = function(state) {
-  return state || {
-    token: storage.get("access_token"),
-    info:{
-      name:""
-    },
-    nodes:[]
-  };
+  return state;
 }
 
 module.exports=connect(mapStateToProps)(HomePage);

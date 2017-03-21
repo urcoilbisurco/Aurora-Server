@@ -16,9 +16,9 @@ client.on("message", (topic,message)=>{
 function update(topic, message){
   console.log("TOPIC:", topic)
   console.log("MESSAGE:",message)
-  var uuid=topic.split("/")[0]
+  var user=topic.split("/")[0]
   var node=topic.split("/")[1]
-  db.update(uuid, node, message);
+  db.update(user, node, message);
 }
 
 

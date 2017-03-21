@@ -1,5 +1,6 @@
-import { createStore } from 'redux'
-
+import { compose, applyMiddleware, createStore, combineReducers } from 'redux';
+import createLogger from 'redux-logger';
+import persistState from 'redux-localstorage'
 /**
  * This is a reducer, a pure function with (state, action) => state signature.
  * It describes how an action transforms the state into the next state.
@@ -17,43 +18,49 @@ import { createStore } from 'redux'
 //{authenticated:true/false, user:user, nodes:nodes}
 
  const userReducer = (state, action) => {
-  switch (action.type) {
+   switch (action.type) {
     case 'GET_USER_STATE':
-      console.log("action taken.payload:", action.payload);
-      return action.payload//{ action.payload
-        // nodes: action.payload.nodes,
-        // authenticated:true,
-        // user:action.payload
-      //}
+      let p=action.payload;
+      return {
+        ...state,
+        pay
+      }
     case 'LOGIN':
       return {
-        nodes: action.payload.nodes,
+        ...action.payload,
         authenticated:true,
-        user:action.payload
       }
     default:
-      return state
+      return state || {authenticated:false}
   }
+}
+
+const nodesReducer = (state, action) => {
+ switch (action.type) {
+   case 'GET_USER_STATE':
+      return action.payload.nodes
+   case 'LOGIN':
+      return [];
+   case 'SET_STATUS':
+    return state.map(function(m){
+      if(m._id==action.id)
+        m.state=action.state
+      return m
+    })
+   case 'NEW_NODE':
+    return state;
+   default:
+     return state || []
+ }
+}
+var reducers={
+  user: userReducer,
+  nodes: nodesReducer
 }
 
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
-let store = createStore(userReducer)
-console.log("store store.js", store)
-module.exports=store;
-
-// You can use subscribe() to update the UI in response to state changes.
-// Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
-// However it can also be handy to persist the current state in the localStorage.
-
-store.subscribe(() =>
-  console.log("STORE CHANGED:", store.getState())
+const logger = createLogger();
+let store = createStore(combineReducers(reducers),applyMiddleware(logger),   persistState(),
 )
-
-// The only way to mutate the internal state is to dispatch an action.
-// The actions can be serialized, logged or stored and later replayed.
-// store.dispatch({ type: 'INCREMENT' })
-// // 1
-// store.dispatch({ type: 'INCREMENT' })
-// // 2
-// store.dispatch({ type: 'DECREMENT' })
+module.exports=store;

@@ -7,17 +7,16 @@ var controller={
   getWeather:(req, res)=>{
     return axios.get(url)
     .then(function(response){
-      console.log("response", response.data);
       res.json({
         temp:response.data.currently.temperature,
         descr:response.data.currently.summary,
       })
     }).catch(function(err){
+      console.log("ERROR", err);
       res.json({
         temp:"---",
         descr:"---"
       })
-      console.log("ERROR", err);
     });
   },
 }

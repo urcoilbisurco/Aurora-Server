@@ -18,11 +18,6 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
     new HtmlWebpackPlugin({
       template: 'webapp/index.html',
       inject: 'body',
@@ -39,7 +34,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          "presets": ["react", "es2015"]
+          "presets": ["react", "es2015"],
+          "plugins": ["transform-object-rest-spread"]
         }
       },
       {

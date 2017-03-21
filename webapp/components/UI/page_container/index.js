@@ -6,6 +6,11 @@ require('velocity-animate');
 var Anime = require("react-anime").default;
 
 var Container=React.createClass({
+  getDefaultProps:function(){
+    return {
+      icon:""
+    }
+  },
   getInitialState:function(){
     return {
       show:0

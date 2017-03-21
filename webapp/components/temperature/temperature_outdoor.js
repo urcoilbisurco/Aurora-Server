@@ -7,7 +7,6 @@ var utils=require("../../utils/weather");
 const OutdoorCard = React.createClass({
   componentDidMount:function(){
     utils.getWeather().then(function(r){
-      console.log("DATA", r)
       this.setState(r.data);
     }.bind(this));
   },

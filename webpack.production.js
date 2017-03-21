@@ -70,7 +70,8 @@ module.exports = {
         loader: 'babel-loader',
         include: [path.resolve(__dirname, './node_modules/react-icons/md')],
         query: {
-            presets: ['es2015', 'react', 'stage-0']
+            presets: ['es2015', 'react', 'stage-0'],
+            plugins: ["transform-object-rest-spread"]
         }
       },
       {test: /\.(jpg|png)$/, loader: "file-loader"},
