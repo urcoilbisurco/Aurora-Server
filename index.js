@@ -65,12 +65,12 @@ if (!env.production) {
   http.createServer(function(req, res) {
     res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
     res.end();
-  }).listen(80);
+  }).listen(env.port);
   https.createServer({
     key: fs.readFileSync(env.https_cert_folder+"privkey.pem"),
     cert: fs.readFileSync(env.https_cert_folder+"fullchain.pem"),
     ca: fs.readFileSync(env.https_cert_folder+"chain.pem")
-  }, app).listen(env.port);
+  }, app).listen(443);
 
   app.use(compression());
   app.use(express.static(__dirname + '/webapp/dist'));
