@@ -4,6 +4,7 @@ var passport=require("passport");
 var morgan  = require('morgan')
 var path=require("path");
 var compression  = require('compression')
+var fs = require('fs');
 
 var env=require("./_env");
 var broker=require("./utils/broker");
