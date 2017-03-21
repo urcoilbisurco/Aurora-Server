@@ -20,13 +20,12 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 app.use("/", routes);
-app.set('port', (env.port || 3456));
 app.use(passport.initialize());
 app.use(morgan('dev'))
 
 
 if (!env.production) {
-
+  app.set('port', (env.port || 3456));
   app.listen(app.get("port"),  () => {
     console.log('Ready on localhost:3456')
   })
@@ -71,7 +70,7 @@ if (!env.production) {
     key: fs.readFileSync(env.https_cert_folder+"privkey.pem"),
     cert: fs.readFileSync(env.https_cert_folder+"fullchain.pem"),
     ca: fs.readFileSync(env.https_cert_folder+"chain.pem")
-  }, app).listen(app.get("port"));
+  }, app).listen(env.port);
 
   app.use(compression());
   app.use(express.static(__dirname + '/webapp/dist'));
