@@ -57,7 +57,7 @@ const HomePage = React.createClass({
             { this.props.nodes.map((node)=>{
               console.log("NODE STATE", node.state)
                 return (
-                  <SwitchCard name={node.name} node={node._id} key={node._id} state={node.state} verb="is" background="star-lights" toggle="stars"/>
+                  <SwitchCard name={node.name} node={node.uuid} key={node.uuid} state={node.state} verb="is" background="star-lights" toggle="stars"/>
                 )
               })
             }
