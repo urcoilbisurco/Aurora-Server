@@ -13,8 +13,6 @@ const SwitchCard = React.createClass({
   // },
   onChange:function(what){
     let change={open: !this.props.state.open}
-    //TODO: use REDUX to dispatch this
-    //this.setState(change)
     store.dispatch({
       type: 'SET_STATUS',
       id:this.props.node,
