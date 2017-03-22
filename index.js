@@ -74,7 +74,7 @@ if (!env.production) {
 
   app.use(compression());
   app.use(express.static(__dirname + '/webapp/dist'));
-  app.get('/', function response(req, res, next) {
+  app.get('*', function response(req, res, next) {
     if (req.xhr) { return next();}
     res.sendFile(path.join(__dirname, 'webapp/dist/index.html'));
   });

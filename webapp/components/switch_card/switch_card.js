@@ -13,9 +13,11 @@ const SwitchCard = React.createClass({
   // },
   onChange:function(what){
     let change={open: !this.props.state.open}
+    console.log("was", this.props.state.open)
+    console.log("now is ", change.open)
     store.dispatch({
       type: 'SET_STATUS',
-      id:this.props.node,
+      node:this.props.node,
       state:change
     })
     utils.setStatus(this.props.node, change)
