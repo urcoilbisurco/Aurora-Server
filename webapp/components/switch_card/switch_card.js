@@ -1,8 +1,8 @@
 var React = require('react');
-var Switch= require('../switch/switch');
-var utils=require("../../utils/switch");
+var Switch= require('components/switch/switch');
+var utils=require("utils/switch");
 var css=require("./switch_card.scss");
-import store from '../../store';
+import store from 'store';
 
 const SwitchCard = React.createClass({
   // componentDidMount:function(){

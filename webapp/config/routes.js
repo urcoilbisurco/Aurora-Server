@@ -5,14 +5,10 @@ import {
   Route,
   IndexRoute
 } from 'react-router-dom'
-// var Router = ReactRouter.Router;
-// var Route = ReactRouter.Route;
-// var hashHistory = ReactRouter.hashHistory;
-// var IndexRoute = ReactRouter.IndexRoute;
-var Layout = require("../pages/layout");
-var Home = require("../pages/home_page");
-var Auth = require("../pages/auth/index.js");
-var Nodes = require("../pages/nodes");
+var Layout = require("/pages/layout");
+var Home = require("/pages/home_page");
+var Auth = require("/pages/auth/index.js");
+var Nodes = require("/pages/nodes");
 
 var routes = (
   <Router>

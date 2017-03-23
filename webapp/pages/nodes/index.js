@@ -1,12 +1,12 @@
 var React = require('react');
 var Redirect = require('react-router').Redirect;
 var css=require("./nodes.scss");
-var nodes_utils= require("../../utils/nodes");
-var Input= require("../../components/UI/input/input");
-var Button= require("../../components/UI/button/button");
-var ImageSelect= require("../../components/UI/image_select/image_select");
+var nodes_utils= require("utils/nodes");
+var Input= require("components/UI/input/input");
+var Button= require("components/UI/button/button");
+var ImageSelect= require("components/UI/image_select/image_select");
 import {notify} from 'react-notify-toast';
-var Container=require("../../components/UI/page_container/index");
+var Container=require("components/UI/page_container/index");
 
 const NodesPage = React.createClass({
   contextTypes:{

@@ -1,8 +1,7 @@
 var React = require('react');
 
 var TemperatureCard=require("./temperature_card");
-var utils=require("../../utils/weather");
-
+var utils=require("utils/weather");
 
 const OutdoorCard = React.createClass({
   componentDidMount:function(){

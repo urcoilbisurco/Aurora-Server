@@ -1,16 +1,16 @@
 var React = require('react');
-var SwitchCard=require("../components/switch_card/switch_card");
-var SceneCard=require("../components/scene_card/scene_card");
-var Section=require("../components/UI/section/section");
-var HeaderCard=require("../components/header/header_card");
-var WeatherCard=require("../components/temperature/temperature_outdoor");
-var IndoorCard=require("../components/temperature/temperature_indoor");
-var utils=require("../utils/auth");
-var storage=require("../utils/storage");
+var SwitchCard=require("components/switch_card/switch_card");
+var SceneCard=require("components/scene_card/scene_card");
+var Section=require("components/UI/section/section");
+var HeaderCard=require("components/header/header_card");
+var WeatherCard=require("components/temperature/temperature_outdoor");
+var IndoorCard=require("components/temperature/temperature_indoor");
+var utils=require("utils/auth");
+var storage=require("utils/storage");
 var Anime = require("react-anime").default;
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import store from '../store';
+import store from 'store';
 
 const HomePage = React.createClass({
   contextTypes:{

@@ -1,13 +1,13 @@
 var React = require('react');
 var Redirect = require('react-router').Redirect;
 var css=require("./auth.scss");
-import store from '../../store';
-var auth_utils= require("../../utils/auth");
-var storage=require("../../utils/storage");
-var Input= require("../../components/UI/input/input");
-var Button= require("../../components/UI/button/button");
+import store from 'store';
+var auth_utils= require("utils/auth");
+var storage=require("utils/storage");
+var Input= require("components/UI/input/input");
+var Button= require("components/UI/button/button");
 import {notify} from 'react-notify-toast';
-var Container=require("../../components/UI/page_container/index");
+var Container=require("components/UI/page_container/index");
 
 const AuthPage = React.createClass({
   contextTypes:{

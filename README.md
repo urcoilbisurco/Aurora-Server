@@ -33,7 +33,8 @@ Then run
 
 Then visit localhost:3456
 
-##MQTT
+## MQTT
+
 Aurora Server will listen to all the messages on the mqtt broker with the topic
 
 ```
