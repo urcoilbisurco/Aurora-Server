@@ -72,8 +72,8 @@ var TypeSelect=React.createClass({
         "/icons/temp.png"
       ],
       types:[
-        "temperature",
         "switch"
+        "temperature",
       ],
       label:"Node Type"
     }

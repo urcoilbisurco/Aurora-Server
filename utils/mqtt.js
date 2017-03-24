@@ -18,7 +18,7 @@ function update(topic, message){
   console.log("MESSAGE:",message)
   var user=topic.split("/")[0]
   var node=topic.split("/")[1]
-  db.nodes.updateState(user, node, message);
+  db.nodes.updateState(user, node, JSON.parse(message));
 }
 
 

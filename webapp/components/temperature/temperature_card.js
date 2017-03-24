@@ -1,17 +1,14 @@
 var React = require('react');
 var TemperatureUI=require("./temperature_ui");
 const TemperatureCard = React.createClass({
-  componentDidMount:function(){
-    // utils.getWeather().then(function(data){
-    //   this.setState(data);
-    // }.bind(this));
-  },
-  getInitialState:function() {
+  getDefaultProps:function() {
     return {
       temp:"-",
-      descr:"-",
-      open:false
+      humidity:"-",
     };
+  },
+  getInitialState:function(){
+    open:false
   },
   handleClick:function(){
     this.setState({
@@ -19,18 +16,17 @@ const TemperatureCard = React.createClass({
     })
   },
   render:function() {
-    var descr="Humidity: "+this.state.descr
+    var descr="Humidity: "+this.props.humidity
     return (
       <TemperatureUI
       title="Indoor"
       background="indoor.jpg"
-      temperature={this.state.temp}
+      temperature={this.props.temp}
       open={this.state.open}
       onClick={this.handleClick}
       description={descr}
     />
   )},
 });
-
 
 module.exports=TemperatureCard;
