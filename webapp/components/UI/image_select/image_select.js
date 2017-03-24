@@ -68,8 +68,8 @@ var TypeSelect=React.createClass({
   getDefaultProps:function(){
     return {
       images:[
-        "/assets/indoor.jpg",
-        "/assets/star-lights.jpg"
+        "/icons/switch.png",
+        "/icons/temp.png"
       ],
       types:[
         "temperature",

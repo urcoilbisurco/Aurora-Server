@@ -7,8 +7,6 @@ import store from 'store';
 const SwitchCard = React.createClass({
   onChange:function(what){
     let change={open: !this.props.state.open}
-    console.log("was", this.props.state.open)
-    console.log("now is ", change.open)
     store.dispatch({
       type: 'SET_STATUS',
       node:this.props.node,
@@ -17,7 +15,6 @@ const SwitchCard = React.createClass({
     utils.setStatus(this.props.node, change)
   },
   render:function() {
-    console.log("THIS PROPS OPEN", this.props.state.open)
     let label=(this.props.state.open ? "on" : "off");
     let background={
       "backgroundImage":"url('"+this.props.image+"')",
@@ -27,8 +24,12 @@ const SwitchCard = React.createClass({
         <div className={css.main} style={background}>
           <div className={css.text_container}>
             <div className={css.text}>{this.props.name} {this.props.verb} {label}</div>
-            <Switch className={ css.switch } open={this.props.state.open} onChange={this.onChange} labelOff={"Switch On"} labelOn={"Switch Off"} />
-          </div>
+
+
+            { !this.props.editMode &&
+              <Switch className={ css.switch } open={this.props.state.open} onChange={this.onChange} labelOff={"Switch On"} labelOn={"Switch Off"} />
+            }
+        </div>
         </div>
       </div>
     );

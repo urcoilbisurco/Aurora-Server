@@ -4,10 +4,11 @@ var SceneCard=require("components/scene_card/scene_card");
 var Section=require("components/UI/section/section");
 var HeaderCard=require("components/header/header_card");
 var WeatherCard=require("components/temperature/temperature_outdoor");
-var IndoorCard=require("components/temperature/temperature_indoor");
+var TemperatureCard=require("components/temperature/temperature_card");
 var utils=require("utils/auth");
 var storage=require("utils/storage");
 var Anime = require("react-anime").default;
+var Button=require("components/UI/button/button")
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import store from 'store';
@@ -31,7 +32,8 @@ const HomePage = React.createClass({
   },
   getInitialState:function(){
     return {
-      rendered:false
+      rendered:false,
+      edit:false
     }
   },
   getDefaultProps:function(){
@@ -43,6 +45,11 @@ const HomePage = React.createClass({
       nodes:[]
     };
   },
+  toggleEdit:function(){
+    this.setState({
+      edit:!this.state.edit
+    })
+  },
   render:function() {
     return (
       <div>
@@ -50,26 +57,28 @@ const HomePage = React.createClass({
         <Anime autoplay={!this.state.rendered} opacity={[0, 1]} duration={1000} translateY={['-1em','0em']} delay={(e, i) => i * 300}>
         <div>
           <WeatherCard/>
-          <IndoorCard />
+          { this.props.nodes.filter((n)=>{return n.type=="temperature"}).map((node)=>{
+            return (
+                <TemperatureCard editMode={this.state.edit} name={node.name} node={node.uuid} key={node.uuid} image={node.image} state={node.state}/>
+              )
+            })
+          }
         </div>
         <div>
           <Section title="Controls" direction="horizontal">
             { this.props.nodes.filter((n)=>{return n.type=="switch"}).map((node)=>{
                 return (
-                  <SwitchCard name={node.name} node={node.uuid} key={node.uuid} image={node.image} state={node.state} verb="is" background="star-lights" toggle="stars"/>
+                  <SwitchCard editMode={this.state.edit} name={node.name} node={node.uuid} key={node.uuid} image={node.image} state={node.state} verb="is"/>
                 )
               })
             }
           </Section>
         </div>
         <div>
-          <Section title="Scenes" direction="horizontal">
-            <SceneCard name="Reading" background="star-lights" toggle="-"/>
-            <SceneCard name="Telefilm" background="main-lights" toggle="-"/>
-          </Section>
-          <div className="settings">
-            <Link to="/nodes">Add new node</Link>
-          </div>
+        <div className="settings">
+          <Link to="/nodes">Add new node</Link>
+          <Button type="button" onClick={this.toggleEdit}>Edit</Button>
+        </div>
       </div>
       </Anime>
       </div>

@@ -38,7 +38,6 @@ import persistState from 'redux-localstorage'
 const nodesReducer = (state, action) => {
  switch (action.type) {
    case 'GET_USER_STATE':
-      console.log("GET_USER_STATE", action);
       return action.payload.nodes
    case 'LOGIN':
       return [];
