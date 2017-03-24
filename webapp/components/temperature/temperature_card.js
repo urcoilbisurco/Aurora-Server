@@ -8,7 +8,9 @@ const TemperatureCard = React.createClass({
     };
   },
   getInitialState:function(){
-    open:false
+    return {
+      open:false    
+    }
   },
   handleClick:function(){
     this.setState({
