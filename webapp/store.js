@@ -50,7 +50,7 @@ const nodesReducer = (state, action) => {
       return m
     })
    case 'NEW_NODE':
-    return state;
+    return [...state, action.payload];
    default:
      return state || []
  }

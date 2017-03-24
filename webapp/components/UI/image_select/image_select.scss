@@ -3,7 +3,6 @@
 .image_container{
   display:flex;
   overflow-x: scroll;
-  height:200px;
   display:flex;
   flex-wrap:nowrap;
   overflow-x: scroll;
@@ -11,6 +10,12 @@
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
   }
+}
+.image_container_small{
+  height:150px;
+}
+.image_container_big{
+  height:200px;
 }
 .label{
   color:#666;

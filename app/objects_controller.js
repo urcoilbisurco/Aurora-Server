@@ -3,7 +3,6 @@ var mqtt = require("../utils/mqtt");
 var uuid = require('uuid/v1');
 var codes = require('voucher-code-generator');
 
-
 var controller={
   getData:(req, res)=>{
     db.data.get({node: req.params.node}, {limit:10})
@@ -42,25 +41,39 @@ var controller={
     })
   },
   generateNode:(req,res)=>{
-    code=codes.generate({
+    let code=codes.generate({
       length: 4,
       count: 1,
       charset: "0123456789"
     });
-    uuid=uuid()
+    let u=uuid();
+    console.log("BODY", req.body)
     data={
       user:req.user.token,
+      type:req.body.type,
       name:req.body.name,
       image:req.body.image,
       registered:false,
-      uuid:uuid,
-      code: code[0]
+      uuid:u,
+      code: code[0],
+      state: req.body.state || {}
     }
     db.nodes.generate(data)
     .then((d)=>{
       return res.json(d);
     })
+  },
+  deleteNode:(req,res)=>{
+    query={
+      user:req.user.token,
+      uuid:req.params.node,
+    }
+    db.nodes.del(query)
+    .then((d)=>{
+      return res.json(d);
+    })
   }
+
 }
 
 module.exports = controller;

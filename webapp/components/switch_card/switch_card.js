@@ -5,12 +5,6 @@ var css=require("./switch_card.scss");
 import store from 'store';
 
 const SwitchCard = React.createClass({
-  // componentDidMount:function(){
-  //   utils.getStatus(this.props.node)
-  //   .then(function(state){
-  //     this.setState(state.state)
-  //   }.bind(this))
-  // },
   onChange:function(what){
     let change={open: !this.props.state.open}
     console.log("was", this.props.state.open)
@@ -26,7 +20,7 @@ const SwitchCard = React.createClass({
     console.log("THIS PROPS OPEN", this.props.state.open)
     let label=(this.props.state.open ? "on" : "off");
     let background={
-      "backgroundImage":"url('./assets/"+this.props.background+".jpg')",
+      "backgroundImage":"url('"+this.props.image+"')",
     }
     return (
       <div className={css.switch_card}>

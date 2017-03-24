@@ -7,28 +7,14 @@ function build_url(url, token=null){
   return ("/api/v1"+url+"?access_token="+t)
 }
 module.exports={
-  getUserState:(access_token)=>{
-    return axios.get(build_url("/state", access_token)).then((response)=>{
+  createNode:(opts)=>{
+    return axios.post(build_url("/nodes"), opts)
+    .then((response)=>{
       return response.data;
     }).catch(function(err){
       console.log("ERROR", err);
       return err;
     });
-  },
-  login:function(data){
-    return axios.post(build_url("/users/login"), data)
-    .then(function(response){
-      console.log("response", response.data);
-      return response.data
-    })
-  },
-  register:function(data){
-    return axios.post(build_url("/users"), data)
-    .then(function(response){
-      console.log("response", response.data);
-      return response.data
-    }).catch(function(err){
-      console.log("ERROR", err);
-    });
-  },
+  }
+
 }

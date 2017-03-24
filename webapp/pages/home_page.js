@@ -54,10 +54,9 @@ const HomePage = React.createClass({
         </div>
         <div>
           <Section title="Controls" direction="horizontal">
-            { this.props.nodes.map((node)=>{
-              console.log("NODE STATE", node.state)
+            { this.props.nodes.filter((n)=>{return n.type=="switch"}).map((node)=>{
                 return (
-                  <SwitchCard name={node.name} node={node.uuid} key={node.uuid} state={node.state} verb="is" background="star-lights" toggle="stars"/>
+                  <SwitchCard name={node.name} node={node.uuid} key={node.uuid} image={node.image} state={node.state} verb="is" background="star-lights" toggle="stars"/>
                 )
               })
             }

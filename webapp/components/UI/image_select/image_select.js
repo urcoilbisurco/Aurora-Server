@@ -18,7 +18,7 @@ var Image=  React.createClass({
   }
 })
 var ImageSelect=React.createClass({
-  getDefaultProps:()=>{
+  getDefaultProps:function(){
     return {
       images:[
         "/assets/indoor.jpg",
@@ -26,12 +26,14 @@ var ImageSelect=React.createClass({
         "/assets/netflix.jpg",
         "/assets/main-lights.jpg",
         "/assets/star-lights.jpg"
-      ]
+      ],
+      label:"Choose Image",
+      height:"big"
     }
   },
-  getInitialState:()=>{
+  getInitialState:function(){
     return {
-      selected:undefined,
+      selected:this.props.images[0],
     }
   },
   value:function(){
@@ -41,12 +43,16 @@ var ImageSelect=React.createClass({
     this.setState({
       selected:image
     })
+    if (this.props.callback){
+      this.props.callback(image)
+    }
   },
   render:function(){
+    let height=this.props.height=="big" ? css.image_container_big : css.image_container_small;
     return (
-      <div className={cn(css.image_select)}>
-        <label className={css.label}>Choose Image</label>
-        <div className={css.image_container}>
+      <div>
+        <label className={css.label}>{this.props.label}</label>
+        <div className={cn(css.image_container, height)}>
         { this.props.images.map((image)=>{
             return <Image selected={this.state.selected==image} key={image} onClick={this.handleClick} url={image} />
           })
@@ -56,4 +62,45 @@ var ImageSelect=React.createClass({
     )
   }
 })
-module.exports = ImageSelect;
+
+
+var TypeSelect=React.createClass({
+  getDefaultProps:function(){
+    return {
+      images:[
+        "/assets/indoor.jpg",
+        "/assets/star-lights.jpg"
+      ],
+      types:[
+        "temperature",
+        "switch"
+      ],
+      label:"Node Type"
+    }
+  },
+  getInitialState:function(){
+    return {
+      selected:this.props.types[0],
+    }
+  },
+  value:function(){
+    return this.state.selected
+  },
+  handleSelect:function(image){
+    let pos=this.props.images.indexOf(image)
+    let type=this.props.types[pos]
+    this.setState({
+      selected:type
+    })
+    if (this.props.callback){
+      this.props.callback(type)
+    }
+  },
+  render:function(){
+    return (
+      <ImageSelect height="small" images={this.props.images} label={this.props.label} callback={this.handleSelect}/>
+    )
+  }
+})
+export {TypeSelect, ImageSelect}
+//module.exports = ImageSelect;

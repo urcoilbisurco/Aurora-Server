@@ -61,6 +61,13 @@ module.exports={
         })
       })
     },
+    del:(_query)=>{
+      return new Promise((resolve, reject) => {
+        db.nodes.remove(_query, (err, doc)=>{
+          resolve(doc)
+        })
+      });
+    },
     register:(code, type) => {
       return new Promise((resolve, reject) => {
         db.nodes.findOneAndUpdate(
