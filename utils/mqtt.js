@@ -24,10 +24,11 @@ function update(topic, message){
     if(n.type=="temperature"){
       var last_day_arr=n.state.last_day || []
       last_day_arr.push(data.temp)
-      data.last_day=last_day_arr.slice(Math.max(last_day_arr-24, 1))
+      data.last_day=last_day_arr.slice(Math.max(last_day_arr.length-24, 1))
     }
     db.nodes.updateState(user, node, data);
   })
 }
+
 
 module.exports=client;
