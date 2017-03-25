@@ -50,10 +50,6 @@ if (!env.production) {
 
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
-  // app.get('/auth', function response(req, res) {
-  //   res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'webapp/dist/index.html')));
-  //   res.end();
-  // });
   app.use(express.static(__dirname + '/webapp/dist'));
   app.get('*', function response(req, res, next) {
     if (req.xhr) { return next();}
@@ -62,10 +58,7 @@ if (!env.production) {
   });
 } else {
   //SETUP HTTPS
-  http.createServer(function(req, res) {
-    res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
-    res.end();
-  }).listen(env.port);
+  http.createServer(app).listen(env.port);
   https.createServer({
     key: fs.readFileSync(env.https_cert_folder+"privkey.pem"),
     cert: fs.readFileSync(env.https_cert_folder+"fullchain.pem"),

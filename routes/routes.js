@@ -24,7 +24,7 @@ router.post("/api/v1/users", users_controller.createUser);
 router.post("/api/v1/users/login", users_controller.login);
 
 //register node from Aurora Things - use mqtt instead???
-router.get("/api/v1/nodes/register/:code/:type", objects_controller.registerNode);
+router.get("/api/v1/nodes/register/:code", objects_controller.registerNode);
 router.get("/api/v1/weather", weather_controller.getWeather);
 //needs token authentication
 router.get("/api/v1/state", use_auth, users_controller.getUser)

@@ -68,11 +68,11 @@ module.exports={
         })
       });
     },
-    register:(code, type) => {
+    register:(code) => {
       return new Promise((resolve, reject) => {
         db.nodes.findOneAndUpdate(
           {code:code},
-          {$set: {registered:true, type:type}},
+          {$set: {registered:true}},
           {returnOriginal:false},
           (err, doc) =>  {
             resolve(doc.value)
