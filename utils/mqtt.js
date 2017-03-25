@@ -23,8 +23,10 @@ function update(topic, message){
   db.nodes.get(user, node).then(function(n){
     if(n.type=="temperature"){
       var last_day_arr=n.state.last_day || []
+      console.log("DATA:", data)
       last_day_arr.push(data.temp)
-      data.last_day=last_day_arr.slice(Math.max(last_day_arr.length-24, 1))
+      data.last_day=last_day_arr.slice(Math.max(last_day_arr.length-24, 0))
+      console.log("DATA:", data)
     }
     db.nodes.updateState(user, node, data);
   })

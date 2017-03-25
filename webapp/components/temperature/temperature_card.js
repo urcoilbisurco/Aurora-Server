@@ -26,6 +26,7 @@ const TemperatureCard = React.createClass({
       title="Indoor"
       background="indoor.jpg"
       temperature={this.props.state.temp}
+      data={this.props.state.last_day}
       open={this.state.open}
       onClick={this.handleClick}
       description={descr}
