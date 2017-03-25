@@ -29,7 +29,7 @@ function TemperatureUICard(props){
           autoDraw
           autoDrawDuration={1500}
           autoDrawEasing="ease-out"
-          data={props.data}
+          data={props.data || []}
           gradient={['white', '#ddd']}
           radius={10}
           strokeWidth={3}

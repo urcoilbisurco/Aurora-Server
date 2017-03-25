@@ -24,7 +24,7 @@ function update(topic, message){
     if(n.type=="temperature"){
       var last_day_arr=n.state.last_day || []
       console.log("DATA:", data)
-      last_day_arr.push(data.temp)
+      last_day_arr.push(parseInt(data.temp))
       data.last_day=last_day_arr.slice(Math.max(last_day_arr.length-24, 0))
       console.log("DATA:", data)
     }
