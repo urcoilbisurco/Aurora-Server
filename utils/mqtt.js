@@ -18,8 +18,17 @@ function update(topic, message){
   console.log("MESSAGE:",message)
   var user=topic.split("/")[0]
   var node=topic.split("/")[1]
-  db.nodes.updateState(user, node, JSON.parse(message));
+  var data=JSON.parse(message)
+  //TODO: refactor this part.
+  db.nodes.get(user, node)
+  .then(n){
+    if(n.type=="temperature"){
+      var last_day_arr=n.state.last_day || []
+      last_day_arr.push(data.temp)
+      data.last_day=last_day_arr.slice(Math.max(last_day_arr-24, 1))
+    }
+    db.nodes.updateState(user, node, data);
+  }
 }
-
 
 module.exports=client;
