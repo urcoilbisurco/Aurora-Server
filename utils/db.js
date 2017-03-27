@@ -85,7 +85,6 @@ module.exports={
         db.nodes.findOneAndUpdate(
           {uuid:node, user:user},
           {$set:{state:values}},
-          {returnOriginal:false},
           (err, doc) =>  {
             resolve(doc.value)
           }
