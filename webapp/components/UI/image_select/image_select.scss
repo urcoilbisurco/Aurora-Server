@@ -10,12 +10,22 @@
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
   }
+  g{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
 }
 .image_container_small{
-  height:150px;
+  .image{
+    height:150px;
+  }
 }
 .image_container_big{
-  height:200px;
+  .image{
+    height:200px;
+
+  }
 }
 .label{
   color:#666;
@@ -26,6 +36,7 @@
 }
 .image{
   min-width:130px;
+  height:150px;
   background-repeat:no-repeat;
   background-size:cover;
   background-position: 50%;

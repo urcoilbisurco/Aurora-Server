@@ -1,7 +1,7 @@
 var React = require('react');
 var css=require("./image_select.scss");
 var cn=require("classnames");
-
+var Anime = require("react-anime").default;
 var Image=  React.createClass({
   handleClick:function(){
     this.props.onClick(this.props.url)
@@ -31,9 +31,13 @@ var ImageSelect=React.createClass({
       height:"big"
     }
   },
+  componentDidMount:function(){
+    this.setState({rendered:true})
+  },
   getInitialState:function(){
     return {
       selected:this.props.images[0],
+      rendered:false
     }
   },
   value:function(){
@@ -53,10 +57,13 @@ var ImageSelect=React.createClass({
       <div>
         <label className={css.label}>{this.props.label}</label>
         <div className={cn(css.image_container, height)}>
-        { this.props.images.map((image)=>{
-            return <Image selected={this.state.selected==image} key={image} onClick={this.handleClick} url={image} />
-          })
-        }
+          <Anime opacity={[0, 1]} autoplay={!this.state.rendered} duration={1500} translateX={['-1em','0em']} delay={(e, i) => (i * 200)+300}>
+            { this.props.images.map((image)=>{
+                return <span key={image} ><Image selected={this.state.selected==image}  onClick={this.handleClick} url={image} /></span>
+              })
+            }
+          </Anime>
+
         </div>
       </div>
     )

@@ -44,6 +44,7 @@ const nodesReducer = (state, action) => {
    case 'SET_STATUS':
     return state.map(function(m){
       if(m.uuid==action.node){
+        console.log("EEEEEE")
         m.state=action.state
       }
       return m

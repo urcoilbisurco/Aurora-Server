@@ -3,6 +3,7 @@ var Switch= require('components/switch/switch');
 var utils=require("utils/switch");
 var css=require("./switch_card.scss");
 import store from 'store';
+import { Link } from 'react-router-dom'
 
 const SwitchCard = React.createClass({
   onChange:function(what){
@@ -23,7 +24,9 @@ const SwitchCard = React.createClass({
       <div className={css.switch_card}>
         <div className={css.main} style={background}>
           <div className={css.text_container}>
-            <div className={css.text}>{this.props.name} {this.props.verb} {label}</div>
+            <div className={css.text}>
+              <Link to={"/nodes/"+this.props.node}>{this.props.name} {this.props.verb} {label}</Link>
+              </div>
 
 
             { !this.props.editMode &&
