@@ -6,16 +6,9 @@ function build_url(url){
   return ("/api/v1"+url+"?access_token="+access_token)
 }
 
-function getValue(node){
-  return axios.get(build_url("/nodes/"+node));
-}
-function postValue(node, data){
-  return axios.post(build_url("/nodes/"+node), data);
-}
-
 module.exports={
   getStatus:function(node){
-    return getValue(node)
+    return axios.get(build_url("/nodes/"+node))
     .then(function(response){
       return response.data;
     }).catch(function(err){
@@ -23,8 +16,17 @@ module.exports={
     });
   },
   setStatus:function(node, data){
-    postValue(node, data)
+    return axios.post(build_url("/nodes/"+node), data)
     .then(function(info){
+    }).catch(function(err){
+      console.log("ERROR", err);
+    });
+  },
+  addSchedule:function(node, data){
+    return axios.post(build_url("/nodes/"+node+"/schedule"), data)
+    .then(function(info){
+      console.log(info)
+      return indo.data 
     }).catch(function(err){
       console.log("ERROR", err);
     });

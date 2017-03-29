@@ -92,6 +92,33 @@ module.exports={
         );
       })
     },
+    addSchedule:(user,node, schedule)=>{
+      console.log({uuid:node, user:user})
+      return new Promise((resolve, reject)=>{
+        db.nodes.findOneAndUpdate(
+          {uuid:node, user:user},
+          {$push:{schedules:schedule}},
+          {returnOriginal:false},
+          (err, doc) =>  {
+            console.log("????", doc)
+            resolve(doc)
+          }
+        );
+      })
+    },
+    removeSchedule:(user,node, schedule)=>{
+      console.log({uuid:node, user:user, schedule:schedule})
+      return new Promise((resolve, reject)=>{
+        db.nodes.findOneAndUpdate(
+          {uuid:node, user:user},
+          {$pull:{schedules:{uuid:schedule}}},
+          {returnOriginal:false},
+          (err, doc) =>  {
+            resolve(doc)
+          }
+        );
+      })
+    },
     query: (_query) => {
       return new Promise((resolve, reject) => {
         db.nodes.find(_query, (err,obj) => {

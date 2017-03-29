@@ -7,23 +7,14 @@ var Anime = require("react-anime").default;
 var Container=React.createClass({
   getDefaultProps:function(){
     return {
-      icon:""
+      icon:"",
+      animate:true
     }
-  },
-  getInitialState:function(){
-    return {
-      show:0
-    }
-  },
-  componentDidMount:function(){
-    setTimeout(function(){
-      this.setState({show:1})
-    }.bind(this),1)
   },
   render:function(){
     return (
       <div className={css.container}>
-      <Anime opacity={[0, 1]} duration={1500} translateX={['-1em','0em']} delay={(e, i) => i * 300}>
+      <Anime autoplay={this.props.animate} opacity={[0, 1]} duration={1500} translateX={['-1em','0em']} delay={(e, i) => i * 300}>
         <span>
           {this.props.icon=="back" &&
             <Link className={css.icon} to="/"><MdArrowBack/></Link>

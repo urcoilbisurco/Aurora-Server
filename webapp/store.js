@@ -44,11 +44,18 @@ const nodesReducer = (state, action) => {
    case 'SET_STATUS':
     return state.map(function(m){
       if(m.uuid==action.node){
-        console.log("EEEEEE")
         m.state=action.state
       }
       return m
     })
+  case 'SET_SCHEDULE':
+   return state.map(function(m){
+     if(m.uuid==action.node){
+       m.schedules=m.schedules||[]
+       m.schedules.push(action.schedule)
+     }
+     return m
+   })
    case 'NEW_NODE':
     return [...state, action.payload];
    default:

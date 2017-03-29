@@ -34,6 +34,25 @@ var controller={
       mqtt.publish(topic, JSON.stringify(doc.state))
     })
   },
+  setSchedule:(req,res)=>{
+    var d=new Date();
+    var schedule={
+      uuid:uuid(),
+      state:req.body.change,
+      schedule:req.body.when,
+      will_process_at:d
+    }
+    db.nodes.addSchedule(req.user.token, req.params.node, schedule)
+    .then((doc)=>{
+      res.json(schedule);
+    })
+  },
+  removeSchedule:(req,res)=>{
+    db.nodes.removeSchedule(req.user.token, req.params.node, req.params.schedule)
+    .then((doc)=>{
+      res.json(doc);
+    })
+  },
   registerNode:(req,res)=>{
     db.nodes.register(req.params.code, req.params.type)
     .then((node)=>{

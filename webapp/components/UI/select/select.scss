@@ -1,0 +1,33 @@
+@import "../colors.scss";
+
+.select_container{
+  display:flex;
+  flex-wrap:wrap;
+  g{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+  }
+}
+.label{
+  color:#666;
+  font-size:19px;
+  font-weight:300;
+  margin-bottom:8px;
+  display:block;
+}
+.option{
+  margin:4px;
+  border-radius:15px;
+  color:#666;
+  background:rgba(0,0,0,0.1);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border:8px solid rgba(0,0,0,0.1);
+  width:90px;
+  height:90px;
+  &.selected{
+    border:8px solid $primaryColor;
+  }
+}

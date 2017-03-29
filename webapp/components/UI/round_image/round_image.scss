@@ -1,0 +1,14 @@
+.container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.image{
+  border-radius:999em;
+  width:100px;
+  height:100px;
+  background-size: cover;
+  background-position:50%;
+  border:2px solid rgba(0,0,0,0.6);
+}
