@@ -1,24 +1,13 @@
 @import "../colors.scss";
-
+.cont{
+  a{
+    text-decoration: none;
+  }
+}
 .button{
   background:$primaryColor;
   color:white;
   border-radius:5px;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  cursor:pointer;
-  min-width:60px;
-  padding:8px 12px;
-  font-size:16px;
-  margin-top:4px;
-  margin-bottom:4px;
-}
-.round{
-  composes:button;
-  background:rgba(0,0,0,0.1);
-  color:#666;
-  border-radius:999em;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -28,6 +17,14 @@
   font-size:16px;
   margin-top:16px;
   margin-bottom:4px;
+  text-decoration:none;
+}
+.round{
+  composes:button;
+  text-decoration:none;
+  background:rgba(0,0,0,0.1);
+  color:#666;
+  border-radius:999em;
 }
 .button-left{
   composes:button;

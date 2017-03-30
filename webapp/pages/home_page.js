@@ -75,9 +75,8 @@ const HomePage = React.createClass({
           </Section>
         </div>
         <div>
-        <div className="settings">
-          <Link to="/nodes">Add new node</Link>
-          <Button type="button" onClick={this.toggleEdit}>Edit</Button>
+        <div>
+          <Button type="round" to="/nodes">Add new node</Button>
         </div>
       </div>
       </Anime>

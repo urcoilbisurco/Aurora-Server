@@ -9,26 +9,31 @@ import {MdClose} from 'react-icons/lib/md';
 var utils=require("utils/switch");
 var cn=require("classnames");
 var RoundImage=require("components/UI/round_image/round_image");
+var moment=require("moment");
 
 import { connect } from 'react-redux';
 import store from 'store';
 import {Select} from "components/UI/select/select"
 import {notify} from 'react-notify-toast';
+
+
 const Schedule=React.createClass({
   onClick:function(){
     utils.removeSchedule(this.props.node, this.props.schedule.uuid).then(function(schedule){
-      console.log("SCHEDULE", schedule)
-      // store.dispatch({
-      //   type: 'REMOVE_SCHEDULE',
-      //   schedule:this.props.schedule.uuid
-      // })
+      store.dispatch({
+        type: 'REMOVE_SCHEDULE',
+        node:this.props.node,
+        schedule:this.props.schedule.uuid
+      })
     }.bind(this))
   },
   render:function(){
-    return <div className={css.schedule}>
-            Will turn {this.props.schedule.state.open ? "ON" : "OFF"} in {this.props.schedule.schedule.value} {this.props.schedule.schedule.unit}
-            <span className={css.delete}><MdClose></MdClose></span>
-           </div>
+    return(
+      <div className={css.schedule}>
+        Will turn {this.props.schedule.state.open ? "ON" : "OFF"} at {moment(this.props.schedule.will_process_at).format('h:mm')}
+        <span onClick={this.onClick} className={css.delete}><MdClose></MdClose></span>
+      </div>
+    )
   }
 })
 const NodePage = React.createClass({
@@ -83,12 +88,14 @@ const NodePage = React.createClass({
           <div className={css.switch_container}>
             <Switch className={ css.switch } open={this.props.state.open} onChange={this.onChange} labelOff={"Switch On"} labelOn={"Switch Off"} />
           </div>
-          <div className={css.schedules_container}>
-            { this.props.schedules.map(function(s){
-                return <Schedule node={this.props.node} key={s.uuid} schedule={s}></Schedule>
-              }.bind(this))
-            }
-          </div>
+          { this.props.schedules.length>0 &&
+            <div className={css.schedules_container}>
+              { this.props.schedules.map(function(s){
+                  return <Schedule node={this.props.uuid} key={s.uuid} schedule={s}></Schedule>
+                }.bind(this))
+              }
+            </div>
+          }
           <div className={cn(css.subtitle, css.timer_title)}>Turn {alt_label} in</div>
           <Select label="" ref={(ref)=>this.timer_select=ref} />
           <Button type="round" onClick={this.handleSchedule}>Schedule</Button>

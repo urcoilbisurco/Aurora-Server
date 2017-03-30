@@ -26,7 +26,16 @@ module.exports={
     return axios.post(build_url("/nodes/"+node+"/schedule"), data)
     .then(function(info){
       console.log(info)
-      return indo.data 
+      return info.data
+    }).catch(function(err){
+      console.log("ERROR", err);
+    });
+  },
+  removeSchedule:function(node, schedule){
+    return axios.delete(build_url("/nodes/"+node+"/schedule/"+schedule))
+    .then(function(info){
+      console.log(info)
+      return info.data
     }).catch(function(err){
       console.log("ERROR", err);
     });

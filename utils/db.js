@@ -106,7 +106,7 @@ module.exports={
         );
       })
     },
-    removeSchedule:(user,node, schedule)=>{
+    removeSchedule:(user,node,schedule)=>{
       console.log({uuid:node, user:user, schedule:schedule})
       return new Promise((resolve, reject)=>{
         db.nodes.findOneAndUpdate(

@@ -1,8 +1,9 @@
 var db = require('../utils/db');
 var mqtt = require("../utils/mqtt");
+var scheduler= require("../utils/scheduler");
 var uuid = require('uuid/v1');
 var codes = require('voucher-code-generator');
-
+var moment= require("moment")
 var controller={
   getData:(req, res)=>{
     db.data.get({node: req.params.node}, {limit:10})
@@ -35,19 +36,23 @@ var controller={
     })
   },
   setSchedule:(req,res)=>{
-    var d=new Date();
+    var d=moment()
+    //d.add(req.body.when.value, req.body.when.unit)
+    d.add(5, "seconds")
     var schedule={
       uuid:uuid(),
       state:req.body.change,
       schedule:req.body.when,
-      will_process_at:d
+      will_process_at:d.toDate()
     }
     db.nodes.addSchedule(req.user.token, req.params.node, schedule)
     .then((doc)=>{
+      scheduler.add(schedule, req.params.node, req.user.token)
       res.json(schedule);
     })
   },
   removeSchedule:(req,res)=>{
+    console.log("REQ params", req.params)
     db.nodes.removeSchedule(req.user.token, req.params.node, req.params.schedule)
     .then((doc)=>{
       res.json(doc);
