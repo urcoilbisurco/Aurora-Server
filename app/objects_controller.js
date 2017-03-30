@@ -37,8 +37,8 @@ var controller={
   },
   setSchedule:(req,res)=>{
     var d=moment()
-    //d.add(req.body.when.value, req.body.when.unit)
-    d.add(5, "seconds")
+    d.add(req.body.when.value, req.body.when.unit)
+    //TEST d.add(5, "seconds")
     var schedule={
       uuid:uuid(),
       state:req.body.change,

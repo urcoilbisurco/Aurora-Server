@@ -53,7 +53,7 @@ const HomePage = React.createClass({
   render:function() {
     return (
       <div>
-        <HeaderCard name={this.props.info.name}/>
+        <HeaderCard name={this.props.user.info.name}/>
         <Anime autoplay={!this.state.rendered} opacity={[0, 1]} duration={1000} translateY={['-1em','0em']} delay={(e, i) => i * 300}>
         <div>
           <WeatherCard/>
