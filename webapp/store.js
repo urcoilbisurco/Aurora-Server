@@ -37,10 +37,15 @@ import persistState from 'redux-localstorage'
 
 const nodesReducer = (state, action) => {
   switch (action.type) {
+  // GET_USER_STATE
+  // action.payload.nodes=> nodes from server. replace all client state.
    case 'GET_USER_STATE':
       return action.payload.nodes
    case 'LOGIN':
       return [];
+  // SET_STATUS
+  // action.node=> uuid of the node
+  // action.state=> new state for the node
    case 'SET_STATUS':
     return state.map(function(m){
       if(m.uuid==action.node){
@@ -48,6 +53,9 @@ const nodesReducer = (state, action) => {
       }
       return m
     })
+  // SET_SCHEDULE
+  // action.node=> uuid of the node
+  // action.schedule=> object from server of the schedule
   case 'SET_SCHEDULE':
    return state.map(function(m){
      if(m.uuid==action.node){
@@ -56,6 +64,9 @@ const nodesReducer = (state, action) => {
      }
      return m
    })
+  //  REMOVE_SCHEDULE
+  //  action.node=> uuid of node
+  //  action.schedule=> uuid of schedule
    case 'REMOVE_SCHEDULE':
     return state.map(function(m){
       if(m.uuid==action.node){
@@ -68,6 +79,8 @@ const nodesReducer = (state, action) => {
       }
       return m
     })
+  //  NEW_NODE
+  //  action.payload=> new node to add
    case 'NEW_NODE':
     return [...state, action.payload];
    default:

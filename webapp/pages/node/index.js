@@ -30,7 +30,7 @@ const Schedule=React.createClass({
   render:function(){
     return(
       <div className={css.schedule}>
-        Will turn {this.props.schedule.state.open ? "ON" : "OFF"} at {moment(this.props.schedule.will_process_at).format('h:mm')}
+        Will turn {this.props.schedule.state.open ? "ON" : "OFF"} at {moment(this.props.schedule.will_process_at).format('HH:mm')}
         <span onClick={this.onClick} className={css.delete}><MdClose></MdClose></span>
       </div>
     )
@@ -99,6 +99,9 @@ const NodePage = React.createClass({
           <div className={cn(css.subtitle, css.timer_title)}>Turn {alt_label} in</div>
           <Select label="" ref={(ref)=>this.timer_select=ref} />
           <Button type="round" onClick={this.handleSchedule}>Schedule</Button>
+          <div className={cn(css.subtitle, css.more_info)}>Info</div>
+          <div className={css.info}>Code: <b>{this.props.code}</b></div>
+          <div className={css.info}>This node {this.props.registered ? "is registered." : "isn't registered yet."}</div>
         </div>
       </Container>
     );

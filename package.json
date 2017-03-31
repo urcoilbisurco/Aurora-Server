@@ -40,7 +40,6 @@
     "redux-logger": "^2.8.2",
     "supervisor": "^0.12.0",
     "uuid": "^3.0.1",
-    "velocity-react": "^1.2.1",
     "voucher-code-generator": "^1.1.1"
   },
   "devDependencies": {
