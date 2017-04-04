@@ -5,11 +5,10 @@ var nodes_utils= require("utils/nodes");
 var Container=require("components/UI/page_container/index");
 var Switch= require('components/switch/switch');
 var Button= require('components/UI/button/button');
-import {MdClose} from 'react-icons/lib/md';
 var utils=require("utils/switch");
 var cn=require("classnames");
+var Schedule = require('components/schedule/schedule.js');
 var RoundImage=require("components/UI/round_image/round_image");
-var moment=require("moment");
 
 import { connect } from 'react-redux';
 import store from 'store';
@@ -17,25 +16,6 @@ import {Select} from "components/UI/select/select"
 import {notify} from 'react-notify-toast';
 
 
-const Schedule=React.createClass({
-  onClick:function(){
-    utils.removeSchedule(this.props.node, this.props.schedule.uuid).then(function(schedule){
-      store.dispatch({
-        type: 'REMOVE_SCHEDULE',
-        node:this.props.node,
-        schedule:this.props.schedule.uuid
-      })
-    }.bind(this))
-  },
-  render:function(){
-    return(
-      <div className={css.schedule}>
-        Will turn {this.props.schedule.state.open ? "ON" : "OFF"} at {moment(this.props.schedule.will_process_at).format('HH:mm')}
-        <span onClick={this.onClick} className={css.delete}><MdClose></MdClose></span>
-      </div>
-    )
-  }
-})
 const NodePage = React.createClass({
   contextTypes:{
     router:React.PropTypes.object.isRequired
