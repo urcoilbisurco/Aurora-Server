@@ -7,14 +7,12 @@ var Switch= require('components/switch/switch');
 var Button= require('components/UI/button/button');
 var utils=require("utils/switch");
 var cn=require("classnames");
-var Schedule = require('components/schedule/schedule.js');
+var SchedulerContainer = require('components/schedule/schedules.js');
 var RoundImage=require("components/UI/round_image/round_image");
 
 import { connect } from 'react-redux';
 import store from 'store';
-import {Select} from "components/UI/select/select"
 import {notify} from 'react-notify-toast';
-
 
 const NodePage = React.createClass({
   contextTypes:{
@@ -22,7 +20,8 @@ const NodePage = React.createClass({
   },
   getDefaultProps:function(){
     return {
-      schedules:[]
+      schedules:[],
+      users:[],
     }
   },
   getInitialState:function(){
@@ -42,21 +41,9 @@ const NodePage = React.createClass({
     })
     utils.setStatus(this.props.uuid, change)
   },
-  handleSchedule:function(){
-    let change={open:!this.props.state.open}
-    let when={unit:"minutes", value:this.timer_select.value()}
-    utils.addSchedule(this.props.uuid, {change:change, when:when}).then(function(schedule){
-      console.log("SCHEDULE", schedule)
-      store.dispatch({
-        type: 'SET_SCHEDULE',
-        node:this.props.uuid,
-        schedule:schedule
-      })
-    }.bind(this))
-  },
+
   render:function() {
     let label=(this.props.state.open ? "on" : "off");
-    let alt_label=(!this.props.state.open ? "on" : "off");
     console.log("PROPS", this.props.schedules)
     return (
       <Container animate={!this.state.rendered} icon="back" background={this.props.image}>
@@ -68,17 +55,16 @@ const NodePage = React.createClass({
           <div className={css.switch_container}>
             <Switch className={ css.switch } open={this.props.state.open} onChange={this.onChange} labelOff={"Switch On"} labelOn={"Switch Off"} />
           </div>
-          { this.props.schedules.length>0 &&
-            <div className={css.schedules_container}>
-              { this.props.schedules.map(function(s){
+          <SchedulerContainer label={(!this.props.state.open ? "on" : "off")} state={this.props.state} node={this.props.uuid} schedules={this.props.schedules} />
+          { this.props.users.length>0 &&
+            <div className={css.users_container}>
+              { this.props.users.map(function(s){
                   return <Schedule node={this.props.uuid} key={s.uuid} schedule={s}></Schedule>
                 }.bind(this))
               }
             </div>
           }
-          <div className={cn(css.subtitle, css.timer_title)}>Turn {alt_label} in</div>
-          <Select label="" ref={(ref)=>this.timer_select=ref} />
-          <Button type="round" onClick={this.handleSchedule}>Schedule</Button>
+
           <div className={cn(css.subtitle, css.more_info)}>Info</div>
           <div className={css.info}>Code: <b>{this.props.code}</b></div>
           <div className={css.info}>This node {this.props.registered ? "is registered." : "isn't registered yet."}</div>

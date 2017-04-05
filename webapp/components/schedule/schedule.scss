@@ -1,3 +1,22 @@
+.schedules_container{
+  margin-top:24px;
+  padding:16px;
+  padding-bottom:8px;
+  background:rgba(0,0,0,0.1);
+  border-radius:15px;
+  width:100%;
+  margin-bottom:0px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.subtitle{
+  font-size:19px;
+  color:#666;
+  text-align: center;
+  margin-top:32px;
+}
+
 .schedule{
   width:100%;
   margin-bottom:8px;
