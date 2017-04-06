@@ -29,7 +29,7 @@ const Users=React.createClass({
               return <User node={this.props.uuid} key={u} user={u}></User>
             }.bind(this))
           }
-          <Input type="email" value="francesco@earlymorning.com" theme="transparent" ref={(ref)=>this.input_email=ref} placeholder="Add email..."></Input>
+          <Input type="email" value="test@test.com" theme="transparent" ref={(ref)=>this.input_email=ref} placeholder="Add email..."></Input>
           <Button type="round" onClick={this.onClick}>Add User</Button>
         </div>
     )
