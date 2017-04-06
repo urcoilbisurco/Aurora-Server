@@ -3,6 +3,7 @@
   flex-direction: column;
   margin-bottom:16px;
   margin-top:8px;
+  width:100%;
 }
 .label{
   color:#666;
@@ -13,5 +14,16 @@
 }
 .input{
   width:100%;
+  font-size:16px;
   padding:8px 12px;
+}
+.transparent{
+  margin-bottom:0;
+  .input{
+    padding-left:0;
+    color:#666;
+    border:0;
+    border-bottom:2px solid rgba(0,0,0,0.15);
+    background:none;
+  }
 }

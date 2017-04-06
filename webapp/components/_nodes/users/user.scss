@@ -1,0 +1,30 @@
+.users_container{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width:100%;
+}
+
+.subtitle{
+  font-size:19px;
+  color:#666;
+  text-align: center;
+  margin-top:32px;
+}
+.user{
+  width:100%;
+  margin-bottom:8px;
+  color:#666;
+  display:flex;
+  align-items: center;
+  .delete{
+    margin-left:auto;
+    border: 2px solid;
+    border-radius: 999em;
+    width: 30px;
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+}

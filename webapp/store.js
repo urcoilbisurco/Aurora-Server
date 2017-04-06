@@ -53,6 +53,32 @@ const nodesReducer = (state, action) => {
       }
       return m
     })
+  // ADD_USER
+  // action.node=> uuid of the node
+  // action.user=> object describing the
+  case 'ADD_USER':
+   return state.map(function(m){
+     if(m.uuid==action.node){
+       m.users=m.users||[]
+       m.users=[...m.users, action.user]
+     }
+     return m
+   })
+   //  REMOVE_USER
+   //  action.node=> uuid of node
+   //  action.user=> email of user
+  case 'REMOVE_USER':
+   return state.map(function(m){
+     if(m.uuid==action.node){
+       let u=m.users || []
+       let user=u.find(function(uu){
+         return uu.email==action.schedule
+       })
+       let index=u.indexOf(user)
+       m.users=u.slice(0, index).concat(u.slice(index+1))
+     }
+     return m
+   })
   // SET_SCHEDULE
   // action.node=> uuid of the node
   // action.schedule=> object from server of the schedule
