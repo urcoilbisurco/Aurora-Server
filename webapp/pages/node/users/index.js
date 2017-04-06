@@ -19,7 +19,7 @@ const UsersPage = React.createClass({
   },
   getDefaultProps:function(){
     return {
-      users:["marassi.francesco@gmail.com"],
+      users:["test@test.com"],
     }
   },
   getInitialState:function(){
