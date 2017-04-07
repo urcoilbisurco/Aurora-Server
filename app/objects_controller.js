@@ -1,6 +1,7 @@
 var db = require('../utils/db');
 var mqtt = require("../utils/mqtt");
 var scheduler= require("../utils/scheduler");
+var socket= require("../utils/socket");
 var uuid = require('uuid/v1');
 var codes = require('voucher-code-generator');
 var moment= require("moment")
@@ -33,6 +34,7 @@ var controller={
       topic=req.user.token+"/"+req.params.node+"/update"
       console.log("publishing on...", topic)
       mqtt.publish(topic, JSON.stringify(doc.state))
+      socket.change_node(doc, req.user);
     })
   },
   setSchedule:(req,res)=>{

@@ -1,6 +1,7 @@
 import { compose, applyMiddleware, createStore, combineReducers } from 'redux';
 import createLogger from 'redux-logger';
 import persistState from 'redux-localstorage'
+
 /**
  * This is a reducer, a pure function with (state, action) => state signature.
  * It describes how an action transforms the state into the next state.
@@ -53,6 +54,13 @@ const nodesReducer = (state, action) => {
       }
       return m
     })
+    case 'SOCKET_CHANGE_NODE':
+     return state.map(function(m){
+       if(m.uuid==action.node){
+         return action.payload;
+       }
+       return m
+     })
   // ADD_USER
   // action.node=> uuid of the node
   // action.user=> object describing the

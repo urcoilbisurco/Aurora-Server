@@ -1,6 +1,3 @@
-var mongojs = require('mongojs');
-var mongo = require('mongodb').MongoClient;
-var env=require("../_env.js");
 var db=require("./db.js");
 var scheduler = require('node-schedule');
 var mqtt = require("../utils/mqtt");
@@ -8,8 +5,6 @@ var mqtt = require("../utils/mqtt");
 module.exports={
   add:function(job, node, token){
     scheduler.scheduleJob(job.will_process_at, function(t, n, j){
-      console.log("N", n)
-      console.log("J", j)
       db.nodes.get(t, n).then(function(node){
         schedule=node.schedules.find(function(s){
           return s.uuid==j.uuid;

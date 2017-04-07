@@ -7,7 +7,8 @@
     "start": "supervisor -i webapp,node_modules index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "restart": "npm install && npm run build && forever restart index.js",
-    "build": "webpack --config webpack.production.js --progress"
+    "build": "webpack --config webpack.production.js --progress",
+    "socket": "node socket-server.js"
   },
   "author": "Francesco Marassi",
   "license": "ISC",
@@ -38,6 +39,8 @@
     "redux": "^3.6.0",
     "redux-localstorage": "^0.4.1",
     "redux-logger": "^2.8.2",
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3",
     "supervisor": "^0.12.0",
     "uuid": "^3.0.1",
     "voucher-code-generator": "^1.1.1"
