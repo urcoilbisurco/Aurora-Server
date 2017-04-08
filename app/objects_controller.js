@@ -37,10 +37,23 @@ var controller={
       socket.change_node(doc, req.user);
     })
   },
+  addUser:(req,res)=>{
+    db.nodes.addUser(req.user.token, req.params.node, req.body.email)
+    .then((doc)=>{
+      res.json(doc)
+      socket.change_node(doc, req.user);
+    })
+  },
+  removeUser:(req,res)=>{
+    db.nodes.removeUser(req.user.token, req.params.node, req.params.email)
+    .then((doc)=>{
+      res.json(doc)
+      socket.change_node(doc, req.user);
+    })
+  },
   setSchedule:(req,res)=>{
     var d=moment()
     d.add(req.body.when.value, req.body.when.unit)
-    //TEST d.add(5, "seconds")
     var schedule={
       uuid:uuid(),
       state:req.body.change,
@@ -79,6 +92,8 @@ var controller={
       type:req.body.type,
       name:req.body.name,
       image:req.body.image,
+      users:[req.user.email],
+      schedules:[],
       registered:false,
       uuid:u,
       code: code[0],

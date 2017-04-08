@@ -1,23 +1,22 @@
 var React = require('react');
 var css=require("./user.scss");
 var User=require("./user.js");
-// var utils=require("utils/switch");
-// import store from 'store';
+var utils=require("utils/switch");
 import store from 'store';
 var Button=require("components/UI/button/button");
 var Input=require("components/UI/input/input");
 
 const Users=React.createClass({
   onClick:function(){
-    // utils.removeSchedule(this.props.node, this.props.schedule.uuid).then(function(schedule){
-    //
-    // }.bind(this))
-
-    store.dispatch({
-      type: 'ADD_USER',
-      node:this.props.node,
-      user:this.input_email.value()
-    })
+    let email=this.input_email.value
+    utils.addUser(this.props.node, email).then(function(schedule){
+      // store.dispatch({
+      //   type: 'ADD_USER',
+      //   node:this.props.node,
+      //   user:this.input_email.value()
+      // })
+      console.log("DONE");
+    }.bind(this))
   },
   render:function(){
     return(

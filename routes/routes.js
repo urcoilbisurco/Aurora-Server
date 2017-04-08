@@ -35,6 +35,8 @@ router.get("/api/v1/nodes/:node/", use_auth, objects_controller.getStatusInfo);
 router.delete("/api/v1/nodes/:node", use_auth, objects_controller.deleteNode);
 router.delete("/api/v1/nodes/:node/schedule/:schedule", use_auth, objects_controller.removeSchedule);
 router.post("/api/v1/nodes/:node/schedule", use_auth, objects_controller.setSchedule);
+router.delete("/api/v1/nodes/:node/users/:user", use_auth, objects_controller.removeUser);
+router.post("/api/v1/nodes/:node/users", use_auth, objects_controller.addUser);
 router.post("/api/v1/nodes/:node/", use_auth, objects_controller.setStatusInfo);
 
 module.exports = router;

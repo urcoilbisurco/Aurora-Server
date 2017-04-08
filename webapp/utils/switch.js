@@ -39,5 +39,23 @@ module.exports={
     }).catch(function(err){
       console.log("ERROR", err);
     });
-  }
+  },
+  addUser:function(node, email){
+    return axios.post(build_url("/nodes/"+node+"/users"), {email:email})
+    .then(function(info){
+      console.log(info)
+      return info.data
+    }).catch(function(err){
+      console.log("ERROR", err);
+    });
+  },
+  // removeSchedule:function(node, schedule){
+  //   return axios.delete(build_url("/nodes/"+node+"/users/"+schedule))
+  //   .then(function(info){
+  //     console.log(info)
+  //     return info.data
+  //   }).catch(function(err){
+  //     console.log("ERROR", err);
+  //   });
+  // }
 }

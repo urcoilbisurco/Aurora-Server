@@ -92,6 +92,19 @@ module.exports={
         );
       })
     },
+    addUser:(user,node,collab_user)=>{
+      console.log("COLLAB_USER", collab_user)
+      return new Promise((resolve, reject)=>{
+        db.nodes.findOneAndUpdate(
+          {uuid:node, user:user},
+          {$push:{users:collab_user}},
+          {returnOriginal:false},
+          (err, doc) =>  {
+            resolve(doc.value)
+          }
+        );
+      })
+    },
     addSchedule:(user,node, schedule)=>{
       console.log({uuid:node, user:user})
       return new Promise((resolve, reject)=>{
@@ -100,7 +113,18 @@ module.exports={
           {$push:{schedules:schedule}},
           {returnOriginal:false},
           (err, doc) =>  {
-            console.log("????", doc)
+            resolve(doc.value)
+          }
+        );
+      })
+    },
+    removeUser:(user,node,collab_email)=>{
+      return new Promise((resolve, reject)=>{
+        db.nodes.findOneAndUpdate(
+          {uuid:node, user:user},
+          {$pull:{users:collab_email}},
+          {returnOriginal:false},
+          (err, doc) =>  {
             resolve(doc)
           }
         );

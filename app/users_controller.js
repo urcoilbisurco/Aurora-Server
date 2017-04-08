@@ -34,7 +34,13 @@ var controller={
   },
   getUser: (req, res) => {
     db.nodes
-    .query({user: req.user.token})
+    //.query({user: req.user.token})
+    .query({
+      $or: [
+        {user: req.user.token},
+        {users: {$in:[req.user.email]}}
+      ]  
+    })
     .then( nodes => {
       user=req.user
       user.nodes=nodes
