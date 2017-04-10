@@ -45,10 +45,11 @@ var controller={
     })
   },
   removeUser:(req,res)=>{
-    db.nodes.removeUser(req.user.token, req.params.node, req.params.email)
+    console.log(req.body)
+    db.nodes.removeUser(req.user.token, req.params.node, req.body.email)
     .then((doc)=>{
       res.json(doc)
-      socket.change_node(doc, req.user);
+      socket.change_node(doc.value, req.user);
     })
   },
   setSchedule:(req,res)=>{

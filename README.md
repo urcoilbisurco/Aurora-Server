@@ -29,6 +29,8 @@ Then run
 ```
   npm install
   npm run start
+  (in another tab)
+  npm run socket
 ```
 
 Then visit localhost:3456

@@ -8,7 +8,7 @@ var Input=require("components/UI/input/input");
 
 const Users=React.createClass({
   onClick:function(){
-    let email=this.input_email.value
+    let email=this.input_email.value()
     utils.addUser(this.props.node, email).then(function(schedule){
       // store.dispatch({
       //   type: 'ADD_USER',
@@ -25,7 +25,7 @@ const Users=React.createClass({
             Shared with:
           </div>
           { this.props.users.map(function(u){
-              return <User node={this.props.uuid} key={u} user={u}></User>
+              return <User node={this.props.node} key={u} user={u}></User>
             }.bind(this))
           }
           <Input type="email" value="test@test.com" theme="transparent" ref={(ref)=>this.input_email=ref} placeholder="Add email..."></Input>

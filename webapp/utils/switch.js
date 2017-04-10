@@ -49,6 +49,15 @@ module.exports={
       console.log("ERROR", err);
     });
   },
+  removeUser:function(node, email){
+    return axios.post(build_url("/nodes/"+node+"/users/remove"), {email:email})
+    .then(function(info){
+      console.log(info)
+      return info.data
+    }).catch(function(err){
+      console.log("ERROR", err);
+    });
+  },
   // removeSchedule:function(node, schedule){
   //   return axios.delete(build_url("/nodes/"+node+"/users/"+schedule))
   //   .then(function(info){

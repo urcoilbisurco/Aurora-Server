@@ -119,6 +119,7 @@ module.exports={
       })
     },
     removeUser:(user,node,collab_email)=>{
+      console.log("collab_email", collab_email)
       return new Promise((resolve, reject)=>{
         db.nodes.findOneAndUpdate(
           {uuid:node, user:user},
