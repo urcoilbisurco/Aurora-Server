@@ -4,7 +4,7 @@ var pusher = {
     io: null,
     init: function () {
     console.log("initializing");
-        pusher.io = require('socket.io-client')('http://localhost:3457');
+        pusher.io = require('socket.io-client')(env.socket_server);
     },
     subscribe: function(channel) {
         pusher.io.emit('subscribe', {channel:channel});

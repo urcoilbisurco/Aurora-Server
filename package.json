@@ -6,7 +6,7 @@
   "scripts": {
     "start": "supervisor -i webapp,node_modules index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "restart": "npm install && npm run build && forever restart index.js",
+    "restart": "npm install && npm run build && forever restart index.js && forever restart socket-server.js",
     "build": "webpack --config webpack.production.js --progress",
     "socket": "node socket-server.js"
   },
