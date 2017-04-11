@@ -39,11 +39,13 @@ var controller={
       $or: [
         {user: req.user.token},
         {users: {$in:[req.user.email]}}
-      ]  
+      ]
     })
     .then( nodes => {
       user=req.user
-      user.nodes=nodes
+      user.nodes=nodes.map((node)=>{
+        return Object.assign({}, node, {owner: node.user==req.user.token})
+      })
       res.json(utils.clean(user))
     })
   },

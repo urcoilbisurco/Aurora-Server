@@ -93,7 +93,6 @@ var controller={
       type:req.body.type,
       name:req.body.name,
       image:req.body.image,
-      users:[req.user.email],
       schedules:[],
       registered:false,
       uuid:u,

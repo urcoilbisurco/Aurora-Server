@@ -9,14 +9,7 @@ var Input=require("components/UI/input/input");
 const Users=React.createClass({
   onClick:function(){
     let email=this.input_email.value()
-    utils.addUser(this.props.node, email).then(function(schedule){
-      // store.dispatch({
-      //   type: 'ADD_USER',
-      //   node:this.props.node,
-      //   user:this.input_email.value()
-      // })
-      console.log("DONE");
-    }.bind(this))
+    utils.addUser(this.props.node, email)
   },
   render:function(){
     return(
@@ -28,7 +21,7 @@ const Users=React.createClass({
               return <User node={this.props.node} key={u} user={u}></User>
             }.bind(this))
           }
-          <Input type="email" value="test@test.com" theme="transparent" ref={(ref)=>this.input_email=ref} placeholder="Add email..."></Input>
+          <Input type="email" theme="transparent" ref={(ref)=>this.input_email=ref} placeholder="Add email..."></Input>
           <Button type="round" onClick={this.onClick}>Add User</Button>
         </div>
     )

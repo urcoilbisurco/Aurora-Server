@@ -56,8 +56,10 @@ const NodePage = React.createClass({
         <div className={cn(css.subtitle, css.more_info)}>Info</div>
           <div className={css.info}>Code: <b>{this.props.code}</b></div>
           <div className={css.info}>This node {this.props.registered ? "is registered." : "isn't registered yet."}</div>
+          {this.props.owner &&
           <Button to={"/nodes/"+this.props.uuid+"/users"} type="link">Manage users</Button>
-        </div>
+          }
+      </div>
       </Container>
     );
   },
