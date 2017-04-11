@@ -3,8 +3,8 @@ var env=require("../../_env.js")
 var pusher = {
     io: null,
     init: function () {
-    console.log("initializing");
-        pusher.io = require('socket.io-client')(env.socket_server);
+      console.log("initializing");
+      pusher.io = require('socket.io-client')(env.socket_server);
     },
     subscribe: function(channel) {
         pusher.io.emit('subscribe', {channel:channel});

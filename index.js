@@ -5,7 +5,7 @@ var morgan  = require('morgan')
 var path=require("path");
 var compression  = require('compression')
 var fs = require('fs');
-
+var socket_server=require("./utils/socket-server.js");
 var env=require("./_env");
 var broker=require("./utils/broker");
 var routes= require("./routes/routes");
@@ -26,9 +26,12 @@ app.use(morgan('dev'))
 
 if (!env.production) {
   app.set('port', (env.port || 3456));
-  app.listen(app.get("port"),  () => {
-    console.log('Ready on localhost:3456')
-  })
+  // app.listen(app.get("port"),  () => {
+  //   console.log('Ready on localhost:3456')
+  // })
+  var server=http.createServer(app)
+  socket_server(server);
+  server.listen(env.port);
   //For React App in /webapp
   const webpack = require('webpack');
   const webpackMiddleware = require('webpack-dev-middleware');
@@ -59,11 +62,13 @@ if (!env.production) {
 } else {
   //SETUP HTTPS
   http.createServer(app).listen(env.port);
-  https.createServer({
+  var https_server=https.createServer({
     key: fs.readFileSync(env.https_cert_folder+"privkey.pem"),
     cert: fs.readFileSync(env.https_cert_folder+"fullchain.pem"),
     ca: fs.readFileSync(env.https_cert_folder+"chain.pem")
-  }, app).listen(443);
+  }, app)
+  socket_server(https_server);
+  https_server.listen(443);
 
   app.use(compression());
   app.use(express.static(__dirname + '/webapp/dist'));
