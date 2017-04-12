@@ -1,6 +1,7 @@
 var db=require("./db.js");
 var scheduler = require('node-schedule');
 var mqtt = require("../utils/mqtt");
+var socket= require("./socket");
 
 module.exports={
   add:function(job, node, token){
@@ -17,7 +18,10 @@ module.exports={
             topic=t+"/"+n+"/update"
             console.log("publishing on...", topic)
             mqtt.publish(topic, JSON.stringify(doc.state))
-            db.nodes.removeSchedule(t, n, j.uuid)
+            db.nodes.removeSchedule(t, n, j.uuid).then(function(updated_node){
+              console.log("updated node!", updated_node)
+              socket.change_node(updated_node, t);
+            })
           })
         }
       })

@@ -138,7 +138,7 @@ module.exports={
           {$pull:{users:collab_email}},
           {returnOriginal:false},
           (err, doc) =>  {
-            resolve(doc)
+            resolve(doc.value)
           }
         );
       })
@@ -157,7 +157,7 @@ module.exports={
           {$pull:{schedules:{uuid:schedule}}},
           {returnOriginal:false},
           (err, doc) =>  {
-            resolve(doc)
+            resolve(doc.value)
           }
         );
       })
