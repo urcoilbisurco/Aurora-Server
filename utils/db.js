@@ -82,8 +82,14 @@ module.exports={
     },
     updateState:(user, node, values) => {
       return new Promise((resolve, reject) => {
-        db.nodes.findOneAndUpdate(
-          {uuid:node, user:user},
+        db.nodes.findOneAndUpdate({
+          $and:[
+            {uuid:node},
+            {$or: [
+              {user: user},
+              {users: {$in:[user]}}
+            ]}
+          ]},
           {$set:{state:values}},
           {returnOriginal:false},
           (err, doc) =>  {
@@ -109,7 +115,13 @@ module.exports={
       console.log({uuid:node, user:user})
       return new Promise((resolve, reject)=>{
         db.nodes.findOneAndUpdate(
-          {uuid:node, user:user},
+          {$and:[
+            {uuid:node},
+            {$or: [
+              {user: user},
+              {users: {$in:[user]}}
+            ]}
+          ]},
           {$push:{schedules:schedule}},
           {returnOriginal:false},
           (err, doc) =>  {
@@ -135,7 +147,13 @@ module.exports={
       console.log({uuid:node, user:user, schedule:schedule})
       return new Promise((resolve, reject)=>{
         db.nodes.findOneAndUpdate(
-          {uuid:node, user:user},
+          {$and:[
+            {uuid:node},
+            {$or: [
+              {user: user},
+              {users: {$in:[user]}}
+            ]}
+          ]},
           {$pull:{schedules:{uuid:schedule}}},
           {returnOriginal:false},
           (err, doc) =>  {

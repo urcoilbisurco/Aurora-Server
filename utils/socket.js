@@ -1,4 +1,5 @@
-var socket = require('socket.io-client')('http://localhost:3457');
+var env=require("../_env.js");
+var socket = require('socket.io-client')("http://localhost:"+env.port);
 socket.on('connect', function(){
   console.log("connected to server.")
 });

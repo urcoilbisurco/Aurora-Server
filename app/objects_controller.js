@@ -33,6 +33,7 @@ var controller={
       res.json(doc);
       topic=req.user.token+"/"+req.params.node+"/update"
       console.log("publishing on...", topic)
+      console.log("DOC", doc)
       mqtt.publish(topic, JSON.stringify(doc.state))
       socket.change_node(doc, req.user);
     })
