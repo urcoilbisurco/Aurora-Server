@@ -1,7 +1,6 @@
 function socket_init(server){
   var io = require('socket.io')(server);
   io.on('connection', function(client){
-    console.log("CLIENT", client)
     client.on('subscribe', function(data) {
       console.log("somebody subscribed!")
           if (data!=null && data.channel!=null && data.channel!=="") {
