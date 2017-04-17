@@ -76,7 +76,7 @@ var controller={
     })
   },
   registerNode:(req,res)=>{
-    db.nodes.register(req.params.code, req.params.type)
+    db.nodes.register(req.params.code)
     .then((node)=>{
       res.json(node);
     })

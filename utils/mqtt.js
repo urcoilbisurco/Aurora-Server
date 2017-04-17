@@ -5,13 +5,25 @@ var client  = mqtt.connect(env.mqtt_server);
 
 client.on("connect", ()=>{
   client.subscribe("+/+/updated")
+  client.subscribe("register")
 });
 
 client.on("message", (topic,message)=>{
   if(topic.includes("updated")){
     update(topic, message.toString());
   }
+  if(topic.includes("register")){
+    register(topic, message.toString());
+  }
 });
+
+function register(topic, message){
+  var data=JSON.parse(message);
+  db.nodes.register(data.code)
+  .then((node)=>{
+    client.publish(data.code+"/registered", JSON.stringify({topic:node.user+"/"+node.uuid}))
+  })
+}
 
 function update(topic, message){
   console.log("TOPIC:", topic)
