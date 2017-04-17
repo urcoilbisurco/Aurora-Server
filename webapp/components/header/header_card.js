@@ -39,8 +39,8 @@ const HeaderCard = React.createClass({
     return greeting;
   },
 
-  render:function() {
-    var hi=this.props.user ? this.sayHi(this.props.user.info.name) : "";    
+  render:function(){
+    var hi=this.props.user.info ? this.sayHi(this.props.user.info.name) : "";
     // <Time/>
     return (
       <div className={css.header}>
