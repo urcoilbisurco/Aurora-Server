@@ -32,11 +32,9 @@ Then run
 ```
   npm install
   npm run start
-  (in another tab)
-  npm run socket
 ```
 
-Then visit localhost:3456
+Then visit localhost:3456. A MQTT and a Socket server will be started on port 1883 and on port 3457.
 
 ## MQTT
 
@@ -58,6 +56,9 @@ For state changes from Aurora Server.
 
 ## Todo
 - [x] Client: connect the React Client with MQTT via APIs
-- [ ] Create a new node from React Client
-- [ ] Better configuration for new Node (and type of node)
-- [ ] Share a node between more users
+- [x] Create a new node from React Client
+- [x] Better configuration for new Node (and type of node)
+- [x] Schedule a node on/off 
+- [x] Share a node between more users
+- [ ] Better Layout and design
+- [ ] Add more node types
