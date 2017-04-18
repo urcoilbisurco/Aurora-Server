@@ -2,6 +2,9 @@
 ## Aurora Server
 Express.js server for Aurora smart home project.
 
+![Demo](https://media.giphy.com/media/3oKIPbX1KVk64Rgbx6/giphy.gif)
+
+
 ## Installation
 
 create an "app/_env.js" file with inside:
