@@ -9,10 +9,14 @@
     color:#333;
   }
 }
+.cont{
+  overflow-x: scroll;
+}
 .horizontal{
   display:flex;
-  flex-wrap:nowrap;
+  flex-wrap:wrap;
   overflow-x: scroll;
+  width: 564px;
   &::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
