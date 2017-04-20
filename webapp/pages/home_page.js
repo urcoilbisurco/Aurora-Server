@@ -66,7 +66,7 @@ const HomePage = React.createClass({
         </div>
         <div>
           <Section title="Controls" direction="horizontal">
-            { this.props.nodes.filter((n)=>{return n.type=="switch"}).map((node)=>{
+            { this.props.nodes.filter((n)=>{return ["switch", "hue"].includes(n.type)}).map((node)=>{
                 return (
                   <SwitchCard editMode={this.state.edit} name={node.name} node={node.uuid} key={node.uuid} image={node.image} state={node.state} verb="is"/>
                 )

@@ -11,15 +11,32 @@ var Auth = require("/pages/auth/index.js");
 var Nodes = require("/pages/nodes");
 var Users = require("/pages/node/users/index.js");
 
+//simple utility component to handle scrollToTop when a URL changes
+import { withRouter } from 'react-router'
+const ScrollComponent = React.createClass({
+  componentDidUpdate:function(prevProps){
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0)
+    }
+  },
+  render:function(){
+    return this.props.children
+  }
+})
+const ScrollToTop=withRouter(ScrollComponent);
+
+
 var routes = (
   <Router>
-    <div>
+     <ScrollToTop>
+       <div>
       <Route exact path='/' component={Home}/>
       <Route path='/auth' component={Auth}/>
       <Route exact path='/nodes/:node' component={Node}/>
       <Route exact path='/nodes/:node/users' component={Users}/>
       <Route exact path='/nodes' component={Nodes}/>
-    </div>
+      </div>
+  </ScrollToTop>
   </Router>
 );
 
