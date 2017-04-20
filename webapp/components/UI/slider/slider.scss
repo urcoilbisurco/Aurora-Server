@@ -1,0 +1,33 @@
+@import "../colors.scss";
+
+
+.slider{
+  width: 100%;
+  min-width:280px;
+  height: 24px;
+  //border:3px solid rgba(0,0,0,0.1);
+  color:white;
+  cursor:pointer;
+  display:flex;
+  padding:2px;
+  border-radius:15px;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  background:rgba(0,0,0,0.1);
+}
+.handle{
+  font-size: 0.9em;
+  text-align: center;
+  background-color: white;
+  color: white;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius:999em;
+  line-height: 30px;
+  border:7px solid $primaryColor;
+}
+.handle_active{
+border:8px solid $primaryColor;
+  //background-color: darken($primaryColor, 10);
+}

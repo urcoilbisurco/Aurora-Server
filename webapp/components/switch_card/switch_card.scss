@@ -1,13 +1,13 @@
 .switch_card{
   border-radius:5px;
-  width: 180px;
-  &:first-child{
+  width: 170px;
+  &:nth-child(3n+1){
     .main{
       margin-left:8px;
     }
   }
 
-  &:last-child{
+  &:nth-child(3n){
     .main{
       margin-right:8px;
     }

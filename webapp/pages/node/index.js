@@ -2,13 +2,14 @@ var React = require('react');
 var css=require("./nodes.scss");
 var nodes_utils= require("utils/nodes");
 var Container=require("components/UI/page_container/index");
-var Switch= require('components/switch/switch');
 var utils=require("utils/switch");
 var cn=require("classnames");
 var SchedulerContainer = require('components/_nodes/schedule/schedules.js');
 var UsersContainer = require('components/_nodes/users/users.js');
 var Button=require("components/UI/button/button");
 var NodeInfo=require("components/_nodes/node_info/node_info");
+
+var NodeControls=require("components/_nodes/node_control/node_control");
 
 import { connect } from 'react-redux';
 import store from 'store';
@@ -20,7 +21,7 @@ const NodePage = React.createClass({
   getDefaultProps:function(){
     return {
       schedules:[],
-      users:["marassi.francesco@gmail.com"],
+      users:[],
     }
   },
   getInitialState:function(){
@@ -31,8 +32,7 @@ const NodePage = React.createClass({
   componentDidMount:function(){
     this.setState({rendered:true})
   },
-  onChange:function(what){
-    let change={open: !this.props.state.open}
+  onChange:function(change){
     store.dispatch({
       type: 'SET_STATUS',
       node:this.props.uuid,
@@ -40,18 +40,12 @@ const NodePage = React.createClass({
     })
     utils.setStatus(this.props.uuid, change)
   },
-
   render:function() {
-    let label=(this.props.state.open ? "on" : "off");
-    console.log("PROPS", this.props.schedules)
     return (
       <Container animate={!this.state.rendered} icon="back" background={this.props.image}>
         <div className={css.container}>
           <NodeInfo node={this.props}/>
-          <div className={css.subtitle}>Currently {this.props.name} is {label}</div>
-          <div className={css.switch_container}>
-            <Switch className={ css.switch } open={this.props.state.open} onChange={this.onChange} labelOff={"Switch On"} labelOn={"Switch Off"} />
-          </div>
+          <NodeControls node={this.props} onChange={this.onChange} />
           <SchedulerContainer label={(!this.props.state.open ? "on" : "off")} state={this.props.state} node={this.props.uuid} schedules={this.props.schedules} />
         <div className={cn(css.subtitle, css.more_info)}>Info</div>
           <div className={css.info}>Code: <b>{this.props.code}</b></div>
