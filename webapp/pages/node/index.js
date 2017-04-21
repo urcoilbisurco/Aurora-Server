@@ -38,7 +38,7 @@ const NodePage = React.createClass({
       node:this.props.uuid,
       state:change
     })
-    utils.setStatus(this.props.uuid, {...this.props.state, change})
+    utils.setStatus(this.props.uuid, Object.assign({}, this.props.state, change))//{...this.props.state, change})
   },
   render:function() {
     return (
