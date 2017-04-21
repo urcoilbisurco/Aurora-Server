@@ -25,7 +25,8 @@ var ImageSelect=React.createClass({
         "/assets/outdoor.jpg",
         "/assets/netflix.jpg",
         "/assets/main-lights.jpg",
-        "/assets/star-lights.jpg"
+        "/assets/star-lights.jpg",
+        "/assets/hue.jpg"
       ],
       label:"Choose Image",
       height:"big"
