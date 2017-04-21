@@ -23,8 +23,8 @@ const TemperatureCard = React.createClass({
     var descr="Humidity: "+this.props.state.humidity+"%"
     return (
       <TemperatureUI
-      title="Indoor"
-      background="indoor.jpg"
+      title={this.props.name}
+      background={this.props.image}
       temperature={this.props.state.temp}
       data={this.props.state.last_day}
       open={this.state.open}

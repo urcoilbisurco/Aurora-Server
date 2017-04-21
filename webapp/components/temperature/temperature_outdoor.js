@@ -21,7 +21,7 @@ const OutdoorCard = React.createClass({
     return (
       <TemperatureCard
       title="Outdoor"
-      background="outdoor.jpg"
+      background="assets/outdoor.jpg"
       temperature={temp}
       open={this.state.open}
       description={this.state.descr}

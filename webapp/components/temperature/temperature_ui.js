@@ -11,7 +11,7 @@ function TemperatureUICard(props){
   // let img=require(url)
   // console.log(img)
   let background={
-    "backgroundImage":'url("assets/'+props.background+'")'
+    "backgroundImage":'url("'+props.background+'")'
   }
   return (
     <div onClick={props.onClick} className={css.weather} style={background}>
