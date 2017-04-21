@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom'
 
 const SwitchCard = React.createClass({
   onChange:function(what){
-    let change={open: !this.props.state.open}
+    let c=Object.assign({}, this.props.state, {open: !this.props.state.open})
     store.dispatch({
       type: 'SET_STATUS',
       node:this.props.node,
-      state:change
+      state:c
     })
-    utils.setStatus(this.props.node, change)
+    utils.setStatus(this.props.node, c)
   },
   render:function() {
     let label=(this.props.state.open ? "on" : "off");

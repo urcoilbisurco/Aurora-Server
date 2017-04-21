@@ -33,12 +33,13 @@ const NodePage = React.createClass({
     this.setState({rendered:true})
   },
   onChange:function(change){
+    let c=Object.assign({}, this.props.state, change)
     store.dispatch({
       type: 'SET_STATUS',
       node:this.props.uuid,
-      state:change
+      state:c
     })
-    utils.setStatus(this.props.uuid, Object.assign({}, this.props.state, change))//{...this.props.state, change})
+    utils.setStatus(this.props.uuid, c)
   },
   render:function() {
     return (
