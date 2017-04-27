@@ -31,7 +31,7 @@ var controller={
     db.nodes.updateState(req.user, req.params.node, req.body)
     .then((doc)=>{
       res.json(doc);
-      topic=req.user.token+"/"+req.params.node+"/update"
+      topic=req.params.node.user+"/"+req.params.node+"/update"
       console.log("publishing on...", topic)
       console.log("DOC", doc)
       mqtt.publish(topic, JSON.stringify(doc.state))

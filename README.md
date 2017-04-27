@@ -58,7 +58,8 @@ For state changes from Aurora Server.
 - [x] Client: connect the React Client with MQTT via APIs
 - [x] Create a new node from React Client
 - [x] Better configuration for new Node (and type of node)
-- [x] Schedule a node on/off 
+- [x] Schedule a node on/off
 - [x] Share a node between more users
+- [ ] Refactor sharing part
 - [ ] Better Layout and design
 - [ ] Add more node types
