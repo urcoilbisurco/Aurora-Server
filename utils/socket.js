@@ -11,7 +11,7 @@ module.exports={
     users.push(node.user)
     users.forEach(function(user){
 
-      console.log("published for user "+ user)
+      //console.log("published for user "+ user)
       socket.emit("push", {channel:"users/"+user, event:"state_update", message:{
         type:"SOCKET_CHANGE_NODE",
         node:node.uuid,
