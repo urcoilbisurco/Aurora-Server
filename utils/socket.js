@@ -7,8 +7,10 @@ socket.on('connect', function(){
 module.exports={
   change_node:function(node, current_user){
     let users=node.users
+    //TODO: users contains the email addresses of the users, so I need to get the UUIDs first
     users.push(node.user)
     users.forEach(function(user){
+
       console.log("published for user "+ user)
       socket.emit("push", {channel:"users/"+user, event:"state_update", message:{
         type:"SOCKET_CHANGE_NODE",

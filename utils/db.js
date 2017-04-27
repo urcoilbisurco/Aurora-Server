@@ -86,8 +86,8 @@ module.exports={
           $and:[
             {uuid:node},
             {$or: [
-              {user: user},
-              {users: {$in:[user]}}
+              {user: user.token},
+              {users: {$in:[user.email]}}
             ]}
           ]},
           {$set:{state:values}},

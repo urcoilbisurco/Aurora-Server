@@ -40,7 +40,7 @@ function update(topic, message){
       data.last_day=last_day_arr.slice(Math.max(last_day_arr.length-24, 0))
       console.log("DATA:", data)
     }
-    db.nodes.updateState(user, node, data);
+    db.nodes.updateState({token:user}, node, data);
   })
 }
 

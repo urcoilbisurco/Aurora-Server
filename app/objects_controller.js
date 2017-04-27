@@ -28,7 +28,7 @@ var controller={
     })
   },
   setStatusInfo:(req,res)=>{
-    db.nodes.updateState(req.user.token, req.params.node, req.body)
+    db.nodes.updateState(req.user, req.params.node, req.body)
     .then((doc)=>{
       res.json(doc);
       topic=req.user.token+"/"+req.params.node+"/update"
@@ -64,7 +64,7 @@ var controller={
     }
     db.nodes.addSchedule(req.user.token, req.params.node, schedule)
     .then((doc)=>{
-      scheduler.add(schedule, req.params.node, req.user.token)
+      scheduler.add(schedule, req.params.node, req.user)
       res.json(schedule);
     })
   },
