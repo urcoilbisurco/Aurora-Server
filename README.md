@@ -54,12 +54,28 @@ A node should listen to
 
 For state changes from Aurora Server.
 
+## Use IFTTT + Google Assistant for voice controls
+
+With the Aurora APIs and IFTTT, you can use your voice to control Aurora.
+Here is what you need to do:
+
+1. Create a new Applet on IFTTT
+2. Choose 'Google Assistant' as "This"
+3. Choose 'Say a simple phrase' as "trigger"
+4. Write your phrase (for example: 'Turn on the TV') and then write what you want the Assistant to say in response (for example: 'Turning on TV...')
+5. Choose 'Maker Webhooks' as 'action service'
+6. As URL, write **{{URL}}/api/v1/nodes/{{UUID_NODE}}?access_token={{UUID_USER}}**, where URL is the url where your server is hosted, UUID_NODE is the node UUID and UUID_USER is the user UUID. Note that you can't test this on localhost, you need to have a real domain.
+7. As Method, choose POST, and as Content Type choose "application/x-www-form-urlencoded"
+8. As Body, choose the node state that you want to change in the form **{{key}}={{value}}** (for example: open=true for a 'switch' node)
+9. That's it! Save the applet and use Google Assistant on Android or on Google Home to say your phrase Trigger (OK Google, turn on the TV). Everything will work as expected :)
+
+
 ## Todo
 - [x] Client: connect the React Client with MQTT via APIs
 - [x] Create a new node from React Client
 - [x] Better configuration for new Node (and type of node)
 - [x] Schedule a node on/off
 - [x] Share a node between more users
-- [ ] Refactor sharing part
+- [ ] Refactor sharing part - schedule doesn't work
 - [ ] Better Layout and design
 - [ ] Add more node types
