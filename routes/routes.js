@@ -47,7 +47,7 @@ router.post("/api/v1/nodes/:node/", use_auth, objects_controller.setStatusInfo);
 
 //SCENES
 router.post("/api/v1/scenes", use_auth, scenes_controller.createScene);
-router.post("/api/v1/scenes/trigger", use_auth, scenes_controller.triggerScene);
+router.post("/api/v1/scenes/:scene/trigger", use_auth, scenes_controller.triggerScene);
 router.get("/api/v1/scenes", use_auth, scenes_controller.getScenes);
 router.put("/api/v1/scenes/:scene", use_auth, scenes_controller.editScene);
 router.delete("/api/v1/scenes/:scene", use_auth, scenes_controller.deleteScene);

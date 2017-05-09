@@ -35,7 +35,7 @@ var controller={
       console.log("publishing on...", topic)
       console.log("DOC", doc)
       mqtt.publish(topic, JSON.stringify(doc.state))
-      socket.change_node(doc, req.user);
+      socket.change_node(doc);
     })
   },
   addUser:(req,res)=>{

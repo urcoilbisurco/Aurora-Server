@@ -1,12 +1,14 @@
-var mongojs = require('mongojs');
-var mongo = require('mongodb').MongoClient;
-var env=require("../_env.js");
-var db;
+let mongojs = require('mongojs');
+let mongo = require('mongodb').MongoClient;
+let env=require("../_env.js");
+let db;
+
 mongo.connect(env.mongo, function(err, _db) {
   db=_db;
   db.users= db.collection("users");
   db.nodes = db.collection("nodes");
   db.data = db.collection("data");
+  db.scenes = db.collection("scenes");
 });
 
 module.exports={
@@ -45,13 +47,54 @@ module.exports={
     },
     get:(_query, opts={})=>{
       return new Promise((resolve, reject) =>{
-        console.log("query?", _query);
         opts.sort=[["created_at","desc"]]
         db.data.find(_query, {}, opts, (err,obj) => {
           resolve(obj.toArray())
         })
       })
     },
+  },
+  scenes:{
+    del:(_query)=>{
+      return new Promise((resolve, reject) => {
+        db.scenes.remove(_query, (err, doc)=>{
+          resolve(doc)
+        })
+      });
+    },
+    create:(data)=>{
+      return new Promise((resolve, reject) => {
+        db.scenes.insert(data, (err,doc) => {
+          resolve(doc.ops[0])
+        })
+      });
+    },
+    query: (_query) => {
+      return new Promise((resolve, reject) => {
+        db.scenes.find(_query, (err,obj) => {
+          resolve(obj.toArray())
+        })
+      })
+    },
+    get:(user, scene) => {
+      return new Promise((resolve, reject) => {
+        db.scenes.findOne({uuid:scene, user:user}, (err,obj) => {
+          resolve(obj)
+        })
+      })
+    },
+    edit:(query, data) =>{
+      return new Promise((resolve, reject) => {
+        db.scenes.findOneAndUpdate(
+          query,
+          {$set: data},
+          {returnOriginal:false},
+          (err, doc) =>  {
+            resolve(doc.value)
+          }
+        );
+      });
+    }
   },
   nodes:{
     generate:(data, cb) => {
@@ -81,6 +124,7 @@ module.exports={
       });
     },
     updateState:(user, node, values) => {
+      console.log(user,node,values)
       return new Promise((resolve, reject) => {
         db.nodes.findOneAndUpdate({
           $and:[
@@ -93,6 +137,8 @@ module.exports={
           {$set:{state:values}},
           {returnOriginal:false},
           (err, doc) =>  {
+            console.log("ERROR", err);
+            console.log("DOC UPDATE", doc);
             resolve(doc.value)
           }
         );
