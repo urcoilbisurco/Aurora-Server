@@ -35,7 +35,14 @@ import persistState from 'redux-localstorage'
       return state || {authenticated:false}
   }
 }
-
+const scenesReducer=(state, action)=>{
+  switch (action.type) {
+    case 'GET_USER_STATE':
+      return action.payload.scenes
+    default:
+      return state || []
+  }
+}
 const nodesReducer = (state, action) => {
   switch (action.type) {
   // GET_USER_STATE
@@ -123,7 +130,8 @@ const nodesReducer = (state, action) => {
 }
 var reducers={
   user: userReducer,
-  nodes: nodesReducer
+  nodes: nodesReducer,
+  scenes: scenesReducer,
 }
 
 // Create a Redux store holding the state of your app.

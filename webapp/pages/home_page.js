@@ -75,10 +75,19 @@ const HomePage = React.createClass({
           </Section>
         </div>
         <div>
+          <Section title="Your scenes" direction="horizontal">
+            { this.props.scenes.map((scene)=>{
+                return (
+                  <SceneCard name={scene.name} scene={scene.uuid} key={scene.uuid} image={scene.image}/>
+                )
+              })
+            }
+          </Section>
+        </div>
+
         <div>
           <Button type="round" to="/nodes">Add new node</Button>
         </div>
-      </div>
       </Anime>
       </div>
     );

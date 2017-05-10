@@ -33,16 +33,23 @@ var controller={
     })
   },
   getUser: (req, res) => {
-    db.nodes
-    //.query({user: req.user.token})
-    .query({
-      $or: [
-        {user: req.user.token},
-        {users: {$in:[req.user.email]}}
-      ]
-    })
-    .then( nodes => {
-      user=req.user
+    Promise.all([
+      db.nodes
+      //.query({user: req.user.token})
+      .query({
+        $or: [
+          {user: req.user.token},
+          {users: {$in:[req.user.email]}}
+        ]
+      }),
+      db.scenes.query({user:req.user.token})
+    ])
+    .then( children => {
+      console.log("A", arguments)
+      user=req.user;
+      console.log(children);
+      let nodes=children[0];
+      user.scenes=children[1];
       user.nodes=nodes.map((node)=>{
         return Object.assign({}, node, {owner: node.user==req.user.token})
       })

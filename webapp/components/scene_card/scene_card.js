@@ -14,9 +14,10 @@ const SceneCard = React.createClass({
     // }
   },
   onClick:function(){
-    this.setState({
-      open:!this.state.open
-    })
+    // this.setState({
+    //   open:!this.state.open
+    // })
+
   },
   getInitialState:function() {
     return {
@@ -24,22 +25,22 @@ const SceneCard = React.createClass({
       open:false
     };
   },
-  onChange:function(what){
-    let n=this.state.on==0 ? 1 : 0
-    this.setState({
-      on: n
-    })
-    let d=(n==1 ? "on" : "off");
-    //utils.setStatus(this.props.toggle, {arg:d})
-  },
+  // onChange:function(what){
+  //   let n=this.state.on==0 ? 1 : 0
+  //   this.setState({
+  //     on: n
+  //   })
+  //   let d=(n==1 ? "on" : "off");
+  //   //utils.setStatus(this.props.toggle, {arg:d})
+  // },
   render:function() {
     let background={
-      "backgroundImage":"url('./assets/"+this.props.background+".jpg')",
+      "backgroundImage":"url('"+this.props.image+"')",
     }
     return (
       <div className={css.scene_card} onClick={this.onClick}>
         <div className={css.main} style={background}>
-          <div className={cn(css.text_container, this.state.open ? css.open : "")}>
+          <div className={css.text_container}>
             <div className={css.text}>{this.props.name}</div>
           </div>
         </div>
