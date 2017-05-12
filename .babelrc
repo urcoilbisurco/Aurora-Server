@@ -4,6 +4,7 @@
     "react"
   ],
   "plugins": [
+    ["transform-object-rest-spread"],
     ["module-resolver", {
       "root": ["./webapp"],
       "alias": {}

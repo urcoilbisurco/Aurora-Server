@@ -54,6 +54,17 @@ const nodesReducer = (state, action) => {
   // SET_STATUS
   // action.node=> uuid of the node
   // action.state=> new state for the node
+   case 'TRIGGER_SCENE':
+    return state.map(function(m){
+      console.log("ACTION")
+      action.triggers.forEach((t)=>{
+        if(t.uuid==m.uuid){
+          m.state=t.state
+        }
+      })
+      return m;
+    })
+
    case 'SET_STATUS':
     return state.map(function(m){
       if(m.uuid==action.node){

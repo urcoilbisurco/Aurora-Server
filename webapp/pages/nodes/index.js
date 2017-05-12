@@ -3,7 +3,7 @@ var Redirect = require('react-router').Redirect;
 var css=require("./nodes.scss");
 import store from 'store';
 import {ImageSelect, TypeSelect} from "components/UI/image_select/image_select"
-var nodes_utils= require("utils/nodes");
+import nodes_utils from "utils/nodes";
 var Input= require("components/UI/input/input");
 var Button= require("components/UI/button/button");
 import {notify} from 'react-notify-toast';

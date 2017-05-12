@@ -1,6 +1,6 @@
 var React = require('react');
 var SwitchCard=require("components/switch_card/switch_card");
-var SceneCard=require("components/scene_card/scene_card");
+import SceneCard from "components/scene_card/scene_card";
 var Section=require("components/UI/section/section");
 var HeaderCard=require("components/header/header_card");
 var WeatherCard=require("components/temperature/temperature_outdoor");
@@ -65,6 +65,16 @@ const HomePage = React.createClass({
           }
         </div>
         <div>
+          <Section title="Your scenes" direction="horizontal">
+            { this.props.scenes.map((scene)=>{
+                return (
+                  <SceneCard name={scene.name} scene={scene.uuid} key={scene.uuid} triggers={scene.triggers} image={scene.image}/>
+                )
+              })
+            }
+          </Section>
+        </div>
+        <div>
           <Section title="Controls" direction="horizontal">
             { this.props.nodes.filter((n)=>{return ["switch", "hue"].includes(n.type)}).map((node)=>{
                 return (
@@ -74,16 +84,7 @@ const HomePage = React.createClass({
             }
           </Section>
         </div>
-        <div>
-          <Section title="Your scenes" direction="horizontal">
-            { this.props.scenes.map((scene)=>{
-                return (
-                  <SceneCard name={scene.name} scene={scene.uuid} key={scene.uuid} image={scene.image}/>
-                )
-              })
-            }
-          </Section>
-        </div>
+
 
         <div>
           <Button type="round" to="/nodes">Add new node</Button>
