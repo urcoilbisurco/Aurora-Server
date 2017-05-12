@@ -87,7 +87,7 @@ const HomePage = React.createClass({
 
 
         <div>
-          <Button type="round" to="/nodes">Add new node</Button>
+          <Button type="block" to="/new">Edit</Button>
         </div>
       </Anime>
       </div>

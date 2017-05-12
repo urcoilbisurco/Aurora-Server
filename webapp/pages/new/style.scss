@@ -1,0 +1,38 @@
+@import "../../components/UI/colors.scss";
+
+.container{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+
+
+}
+
+.box_container{
+  display:flex;
+  flex-direction: row;
+  width:100%;
+  align-items: center;
+  justify-content: space-around;
+}
+.choosebox{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background:rgba(0,0,0,0.1);
+  border-radius:5px;
+  width:40%;
+  height:300px;
+  a{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  h3{
+    margin:0;
+    color:#666;
+  }
+}

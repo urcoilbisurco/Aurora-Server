@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -10,6 +10,8 @@ var Node = require("/pages/node/index.js");
 var Auth = require("/pages/auth/index.js");
 var Nodes = require("/pages/nodes");
 var Users = require("/pages/node/users/index.js");
+
+import New from "/pages/new/new_page";
 
 //simple utility component to handle scrollToTop when a URL changes
 import { withRouter } from 'react-router'
@@ -32,6 +34,7 @@ var routes = (
        <div>
       <Route exact path='/' component={Home}/>
       <Route path='/auth' component={Auth}/>
+      <Route path='/new' component={New}/>
       <Route exact path='/nodes/:node' component={Node}/>
       <Route exact path='/nodes/:node/users' component={Users}/>
       <Route exact path='/nodes' component={Nodes}/>

@@ -45,9 +45,7 @@ var controller={
       db.scenes.query({user:req.user.token})
     ])
     .then( children => {
-      console.log("A", arguments)
       user=req.user;
-      console.log(children);
       let nodes=children[0];
       user.scenes=children[1];
       user.nodes=nodes.map((node)=>{
