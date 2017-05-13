@@ -35,7 +35,7 @@ class ScenesPage extends React.Component{
           <h3>Add new scene</h3>
           <Input label="Name of your scene" ref={(ref) => this.input_name = ref} />
           <span className={css.select}>
-            <NodesSelect nodes={this.props.nodes} ref={(ref)=>this.nodes_select=ref} />
+            <NodesSelect nodes={this.props.nodes.filter(n=> ["switch", "hue"].includes(n.type)) } ref={(ref)=>this.nodes_select=ref} />
           </span>
           <span className={css.select}>
             <ImageSelect ref={(ref)=>this.image_select=ref} />

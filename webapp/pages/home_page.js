@@ -65,14 +65,16 @@ const HomePage = React.createClass({
           }
         </div>
         <div>
-          <Section title="Your scenes" direction="horizontal">
-            { this.props.scenes.map((scene)=>{
-                return (
-                  <SceneCard name={scene.name} scene={scene.uuid} key={scene.uuid} triggers={scene.triggers} image={scene.image}/>
-                )
-              })
-            }
-          </Section>
+          {this.props.scenes.length>0 &&
+            <Section title="Your scenes" direction="horizontal">
+              { this.props.scenes.map((scene)=>{
+                  return (
+                    <SceneCard name={scene.name} scene={scene.uuid} key={scene.uuid} triggers={scene.triggers} image={scene.image}/>
+                  )
+                })
+              }
+            </Section>
+          }
         </div>
         <div>
           <Section title="Controls" direction="horizontal">
