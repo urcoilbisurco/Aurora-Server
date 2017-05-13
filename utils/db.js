@@ -124,7 +124,10 @@ module.exports={
       });
     },
     updateState:(user, node, values) => {
-      console.log(user,node,values)
+      let elements=Object.keys(values).reduce((all, k)=>{
+        all["state."+k]=values[k]
+        return all;
+      }, {})
       return new Promise((resolve, reject) => {
         db.nodes.findOneAndUpdate({
           $and:[
@@ -134,7 +137,7 @@ module.exports={
               {users: {$in:[user.email]}}
             ]}
           ]},
-          {$set:{state:values}},
+          {$set:elements},
           {returnOriginal:false},
           (err, doc) =>  {
             console.log("ERROR", err);
