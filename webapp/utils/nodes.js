@@ -17,6 +17,15 @@ export default {
       return err;
     });
   },
+  createScene:(opts)=>{
+    return axios.post(build_url("/scenes"), opts)
+    .then((response)=>{
+      return response.data;
+    }).catch(function(err){
+      console.log("ERROR", err);
+      return err;
+    });
+  },
   triggerScene:(uuid)=>{
     return axios.post(build_url("/scenes/"+uuid+"/trigger"))
   }

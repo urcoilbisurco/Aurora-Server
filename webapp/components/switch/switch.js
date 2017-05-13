@@ -1,16 +1,14 @@
-var React = require('react');
-var cn=require("classnames");
+import React from "react";
+import cn from "classnames";
+import css from "./switch.scss";
 
-var css=require("./switch.scss");
+const Switch = props =>{
+  return (
+    <span onClick={props.onChange} className={cn(css.switch, props.className)}>
+      <span className={cn(css.handler, props.open ? css.off : css.on)}></span>
+    </span>
+  )
+}
 
-const Switch = React.createClass({
-  render:function(){
-    return (
-      <span onClick={this.props.onChange} className={cn(css.switch, this.props.className)}>
-        <span className={cn(css.handler, this.props.open ? css.off : css.on)}></span>
-      </span>
-    )
-  }
-});
-
+export default Switch;
 module.exports = Switch;

@@ -12,9 +12,11 @@ var Nodes = require("/pages/nodes");
 var Users = require("/pages/node/users/index.js");
 
 import New from "/pages/new/new_page";
+import Scenes from "/pages/scenes/";
 
 //simple utility component to handle scrollToTop when a URL changes
 import { withRouter } from 'react-router'
+
 const ScrollComponent = React.createClass({
   componentDidUpdate:function(prevProps){
     if (this.props.location !== prevProps.location) {
@@ -35,6 +37,7 @@ var routes = (
       <Route exact path='/' component={Home}/>
       <Route path='/auth' component={Auth}/>
       <Route path='/new' component={New}/>
+      <Route path='/scenes' component={Scenes}/>
       <Route exact path='/nodes/:node' component={Node}/>
       <Route exact path='/nodes/:node/users' component={Users}/>
       <Route exact path='/nodes' component={Nodes}/>

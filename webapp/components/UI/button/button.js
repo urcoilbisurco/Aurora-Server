@@ -24,5 +24,5 @@ const Button = React.createClass({
     }
   },
 });
-
+export default Button
 module.exports=Button;
