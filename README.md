@@ -12,13 +12,17 @@ create an "_env.js" file with inside:
 ```javascript
 var env={
   production:true,
-  port:80,
+  port:3456,
   mongo:"your mongo URL",
   mqtt_server:"your mqtt server, if you use the broker below it should be mqtt://localhost:1883",
   broker:{
     mongo_url:"mongodb://localhost:27017/",
     port:1883
   },
+  auth: {
+    saltRounds: 10,
+  },
+  socket_server: "http://localhost:3456",
   weather:{
     token:"Your darksky.net API key",
     location:"lat,long",
