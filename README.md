@@ -7,7 +7,7 @@ Express.js server for Aurora smart home project.
 
 ## Installation
 
-create an "app/_env.js" file with inside:
+create an "_env.js" file with inside:
 
 ```javascript
 var env={
@@ -76,6 +76,6 @@ Here is what you need to do:
 - [x] Better configuration for new Node (and type of node)
 - [x] Schedule a node on/off
 - [x] Share a node between more users
-- [ ] Refactor sharing part - schedule doesn't work
+- [x] Refactor sharing part - schedule doesn't work
 - [ ] Better Layout and design
 - [ ] Add more node types
